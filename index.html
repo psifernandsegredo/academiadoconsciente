@@ -3,271 +3,1093 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academia do Consciente — Em breve</title>
-<meta name="description" content="Em breve, novidades. Enquanto isso, siga nas redes sociais.">
+<title>Academia do Consciente — Atendimento online em psicanálise</title>
+<meta name="description" content="Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera. Agendamento pelo WhatsApp.">
 <meta property="og:title" content="Academia do Consciente">
-<meta property="og:description" content="Em breve, novidades.">
+<meta property="og:description" content="Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://academiadoconsciente.com.br">
+<meta name="theme-color" content="#F5F1EA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,700;1,900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
   :root {
     --lilas: #9D7EB8;
     --lilas-escuro: #7A5E94;
+    --lilas-claro: #C9A8D9;
     --rosa: #F8C8D8;
     --pessego: #F4B89A;
-    --lilas-claro: #C9A8D9;
     --creme: #F5F1EA;
+    --creme-fundo: #EFEAE1;
     --grafite: #3A3A3A;
     --cinza: #77787B;
     --branco: #FFFFFF;
+    --gradiente: linear-gradient(135deg, #F8C8D8 0%, #C9A8D9 50%, #F4B89A 100%);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --x: 24px;
+    --header-h: 72px;
   }
-  
-  html, body {
-    height: 100%;
-    overflow: hidden;
-  }
-  
+
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #F8C8D8 0%, #C9A8D9 50%, #F4B89A 100%);
-    background-attachment: fixed;
-    color: var(--branco);
-    min-height: 100vh;
+    font-family: var(--sans);
+    background: var(--creme);
+    color: var(--grafite);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--lilas); color: var(--branco); }
+
+  /* ---------- tipografia ---------- */
+
+  .serif {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+  }
+
+  .dot { color: var(--lilas); }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lilas-escuro);
+    display: block;
+    margin-bottom: 28px;
+  }
+
+  h2.title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    max-width: 16ch;
+  }
+
+  h3.sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: 22px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  p { font-size: 17px; line-height: 1.75; max-width: 62ch; }
+  p + p { margin-top: 20px; }
+
+  .lead { font-size: 19px; }
+  .small { font-size: 14px; color: var(--cinza); }
+
+  a { color: inherit; }
+
+  /* ---------- estrutura ---------- */
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  section { padding: clamp(72px, 11vw, 128px) 0; }
+  section[id] { scroll-margin-top: var(--header-h); }
+
+  .rule {
+    border: 0;
+    height: 1px;
+    background: var(--grafite);
+    opacity: 0.1;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+
+  /* ---------- header ---------- */
+
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    background: rgba(245, 241, 234, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.08);
+    z-index: 100;
+  }
+
+  .header-inner {
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 24px;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .brand svg { width: 26px; height: 26px; flex-shrink: 0; }
+
+  .brand-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: 17px;
+    line-height: 0.95;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  header.scrolled .brand-name { opacity: 1; transform: translateX(0); }
+
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: none;
+    border: 1px solid rgba(58, 58, 58, 0.18);
+    border-radius: 100px;
+    padding: 9px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grafite);
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+
+  .menu-btn:hover { border-color: var(--lilas); color: var(--lilas-escuro); }
+
+  .menu-bars { position: relative; width: 14px; height: 9px; flex-shrink: 0; }
+  .menu-bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+  .menu-bars span:nth-child(1) { top: 0; }
+  .menu-bars span:nth-child(2) { bottom: 0; width: 9px; }
+
+  .menu-btn[aria-expanded="true"] .menu-bars span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .menu-bars span:nth-child(2) { width: 100%; transform: translateY(-3.5px) rotate(-45deg); }
+
+  .wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--lilas);
+    color: var(--branco);
+    border: 1px solid var(--lilas);
+    border-radius: 100px;
+    padding: 10px 22px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .wa:hover {
+    background: var(--lilas-escuro);
+    border-color: var(--lilas-escuro);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(122, 94, 148, 0.22);
+  }
+
+  .wa svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .wa.ghost {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--branco);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 16px 34px;
+    font-size: 12px;
+  }
+  .wa.ghost:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 14px 34px rgba(58, 58, 58, 0.14);
+  }
+  .wa.ghost svg { width: 19px; height: 19px; }
+
+  /* ---------- menu suspenso ---------- */
+
+  .dropdown {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: var(--creme);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.08);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s;
+    box-shadow: 0 18px 40px rgba(58, 58, 58, 0.07);
+  }
+
+  .dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .dropdown ul { list-style: none; padding: 18px 0 26px; }
+
+  .dropdown a {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: clamp(22px, 3.4vw, 28px);
+    line-height: 1.35;
+    text-decoration: none;
+    color: var(--grafite);
+    transition: color 0.2s ease, padding-left 0.25s ease;
+  }
+
+  .dropdown a:hover, .dropdown a:focus-visible { color: var(--lilas-escuro); padding-left: 10px; }
+
+  /* ---------- abertura ---------- */
+
+  .hero {
     position: relative;
-    overflow-y: auto;
-  }
-  
-  @keyframes shimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  
-  body {
-    background-size: 200% 200%;
-    animation: shimmer 20s ease-in-out infinite;
-  }
-  
-  .content {
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
     text-align: center;
-    max-width: 600px;
-    width: 100%;
-    animation: fadeIn 1.2s ease-out;
+    padding: calc(var(--header-h) + 56px) 28px 72px;
+    background: var(--gradiente);
+    background-size: 200% 200%;
+    animation: shimmer 22s ease-in-out infinite;
+    color: var(--branco);
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
-  
-  .symbol {
-    margin-bottom: 50px;
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  
-  .symbol svg {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .logo {
-    font-family: 'Playfair Display', Georgia, serif;
+
+  .hero-symbol { margin-bottom: 30px; }
+  .hero-symbol svg { width: clamp(66px, 10vw, 84px); height: auto; }
+
+  .hero-logo {
+    font-family: var(--serif);
     font-style: italic;
     font-weight: 900;
+    text-transform: lowercase;
     font-size: clamp(38px, 7vw, 64px);
     line-height: 0.95;
-    margin-bottom: 60px;
-    color: var(--branco);
+    letter-spacing: -0.015em;
+    margin: 0 auto 52px;
+    max-width: none;
   }
-  
-  .logo-dot {
-    color: var(--branco);
-  }
-  
-  .message {
-    font-family: 'Playfair Display', Georgia, serif;
+
+  .hero h1 {
+    font-family: var(--serif);
     font-style: italic;
-    font-weight: 400;
-    font-size: clamp(20px, 3.5vw, 28px);
-    line-height: 1.4;
-    margin-bottom: 16px;
-    max-width: 500px;
-    color: var(--branco);
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: clamp(19px, 2.7vw, 25px);
+    line-height: 1.3;
+    letter-spacing: 0;
+    max-width: 24ch;
+    margin: 0 auto 16px;
   }
-  
-  .submessage {
-    font-family: 'Inter', sans-serif;
+
+  .hero p.lead {
+    max-width: 48ch;
+    margin: 0 auto 42px;
+    font-size: clamp(15px, 1.9vw, 17px);
+    line-height: 1.65;
     font-weight: 300;
-    font-size: clamp(14px, 2vw, 16px);
-    line-height: 1.6;
-    opacity: 0.9;
-    margin-bottom: 50px;
-    max-width: 420px;
-    letter-spacing: 0.5px;
+    opacity: 0.92;
   }
-  
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--branco);
-    opacity: 0.6;
-    margin: 0 auto 40px;
-  }
-  
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 36px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 100px;
-    color: var(--branco);
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .cta:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cta:active {
-    transform: translateY(0);
-  }
-  
-  .cta-icon {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
-  }
-  
-  .footer {
-    width: 100%;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    color: var(--branco);
-    padding-top: 40px;
-  }
-  
-  .footer-line {
-    width: 30px;
-    height: 1px;
-    background: var(--branco);
-    opacity: 0.5;
-    margin: 0 auto 20px;
-  }
-  
-  .footer-credit {
-    font-family: 'Playfair Display', Georgia, serif;
+
+  .hero-note {
+    margin-top: 20px;
+    font-family: var(--serif);
     font-style: italic;
-    font-weight: 400;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: none;
-    opacity: 0.85;
-    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    opacity: 0.9;
   }
-  
-  .footer-meta {
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 9px;
     letter-spacing: 3px;
-    opacity: 0.6;
+    text-transform: uppercase;
+    opacity: 0.65;
+    animation: bob 3.2s ease-in-out infinite;
   }
-  
-  @media (max-width: 600px) {
-    body { padding: 40px 20px; }
-    .symbol svg { width: 80px; height: 80px; }
-    .symbol { margin-bottom: 36px; }
-    .logo { margin-bottom: 40px; }
-    .message { margin-bottom: 12px; }
-    .submessage { margin-bottom: 36px; }
-    .cta { padding: 14px 28px; font-size: 12px; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* animação de entrada */
+  .reveal { opacity: 0; transform: translateY(18px); animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .d1 { animation-delay: 0.15s; }
+  .d2 { animation-delay: 0.45s; }
+  .d3 { animation-delay: 0.7s; }
+  .d4 { animation-delay: 0.95s; }
+  .d5 { animation-delay: 1.2s; }
+  .d6 { animation-delay: 1.45s; }
+
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  /* raios do símbolo desenhando */
+  .ray {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .hero-symbol .r1 { animation-delay: 0.2s; }
+  .hero-symbol .r2 { animation-delay: 0.32s; }
+  .hero-symbol .r3 { animation-delay: 0.44s; }
+  .hero-symbol .r4 { animation-delay: 0.56s; }
+  .hero-symbol .r5 { animation-delay: 0.68s; }
+  .hero-symbol .r6 { animation-delay: 0.8s; }
+  .hero-symbol .r7 { animation-delay: 0.92s; }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .core { transform-origin: center; animation: pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; opacity: 0; }
+  @keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* ---------- o que é ---------- */
+
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: clamp(20px, 2.8vw, 26px);
+    line-height: 1.3;
+    color: var(--lilas-escuro);
+    border-left: 2px solid var(--lilas);
+    padding-left: 26px;
+    margin-top: 44px;
+    max-width: 42ch;
+  }
+
+  /* ---------- como funciona ---------- */
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-top: 8px;
+  }
+
+  .step { border-top: 1px solid rgba(58, 58, 58, 0.14); padding-top: 18px; }
+
+  .step-n {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--lilas);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .step p { font-size: 16px; line-height: 1.6; }
+
+  .steps-note { margin-top: 40px; }
+
+  /* ---------- para quem é ---------- */
+
+  .voice { background: var(--creme-fundo); }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+    margin-top: 4px;
+  }
+
+  .col-label {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lilas-escuro);
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(58, 58, 58, 0.14);
+    margin-bottom: 22px;
+  }
+
+  .col ul { list-style: none; }
+  .col li {
+    font-size: 16.5px;
+    line-height: 1.55;
+    padding: 13px 0 13px 26px;
+    position: relative;
+  }
+  .col li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--lilas);
+  }
+  .col.nao li::before { color: var(--cinza); }
+  .col.nao li { color: var(--cinza); }
+
+  .alert {
+    margin-top: 44px;
+    padding: 26px 30px;
+    background: var(--branco);
+    border-left: 3px solid var(--lilas);
+  }
+  .alert p { font-size: 16px; max-width: 70ch; }
+  .alert strong { font-weight: 500; }
+
+  /* ---------- supervisores ---------- */
+
+  .people {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 60px);
+    margin-top: 8px;
+  }
+
+  .person-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 3px;
+    display: block;
+    margin-bottom: 24px;
+    background: var(--creme-fundo);
+  }
+
+  .person-photo.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--creme-fundo);
+  }
+  .person-photo.placeholder svg { width: 62px; height: 62px; opacity: 0.16; }
+
+  .person-role {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lilas-escuro);
+    margin-bottom: 14px;
+  }
+
+  .person p { font-size: 16px; }
+
+  .person-ig {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--lilas-escuro);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(157, 126, 184, 0.4);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .person-ig:hover { border-color: var(--lilas-escuro); }
+
+  /* ---------- dúvidas ---------- */
+
+  .faq { border-top: 1px solid rgba(58, 58, 58, 0.14); margin-top: 8px; }
+
+  details {
+    border-bottom: 1px solid rgba(58, 58, 58, 0.14);
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 24px 40px 24px 0;
+    position: relative;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.3;
+    transition: color 0.2s ease;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--lilas-escuro); }
+
+  summary::after {
+    content: "";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    border-right: 1.5px solid var(--lilas);
+    border-bottom: 1.5px solid var(--lilas);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+
+  details[open] summary::after { transform: translateY(-25%) rotate(-135deg); }
+
+  .answer { padding: 0 0 28px; }
+  .answer p { font-size: 16.5px; max-width: 66ch; color: var(--cinza); }
+
+  /* ---------- chamada final ---------- */
+
+  .closing {
+    background: var(--gradiente);
+    background-size: 200% 200%;
+    animation: shimmer 22s ease-in-out infinite;
+    color: var(--branco);
+    text-align: center;
+    padding: clamp(88px, 13vw, 150px) 28px;
+  }
+
+  .closing h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: clamp(28px, 4.6vw, 46px);
+    line-height: 1.05;
+    max-width: 18ch;
+    margin: 0 auto 40px;
+  }
+
+  .closing .dot { color: var(--branco); }
+
+  /* ---------- rodapé ---------- */
+
+  footer {
+    background: var(--creme-fundo);
+    padding: 76px 0 52px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+    padding-bottom: 44px;
+  }
+
+  .footer-brand svg { width: 34px; height: 34px; margin-bottom: 18px; }
+
+  .footer-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: 26px;
+    line-height: 0.95;
+  }
+
+  .footer-contact p { font-size: 15px; line-height: 1.9; }
+  .footer-contact a { color: var(--grafite); text-decoration: none; border-bottom: 1px solid rgba(58, 58, 58, 0.2); }
+  .footer-contact a:hover { border-color: var(--lilas); color: var(--lilas-escuro); }
+
+  .footer-legal { padding-top: 30px; border-top: 1px solid rgba(58, 58, 58, 0.12); }
+  .footer-legal p { font-size: 12.5px; line-height: 1.7; color: var(--cinza); max-width: 76ch; }
+
+  .footer-links {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .footer-links a { color: var(--cinza); text-decoration: none; transition: color 0.2s ease; }
+  .footer-links a:hover { color: var(--lilas-escuro); }
+  .footer-links .sep { color: var(--lilas); opacity: 0.6; }
+
+  /* ---------- foco visível ---------- */
+
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--lilas-escuro);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .hero a:focus-visible { outline-color: var(--branco); }
+
+  /* ---------- responsivo ---------- */
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; gap: 26px; }
+    .steps { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .people { grid-template-columns: 1fr; gap: 48px; }
+    .person-photo { aspect-ratio: 3 / 2; }
+  }
+
+  @media (max-width: 620px) {
+    :root { --header-h: 64px; }
+    .wrap { padding: 0 22px; }
+    .brand-name { display: none; }
+    .wa { padding: 9px 16px; font-size: 10px; letter-spacing: 1.5px; }
+    .wa span.wa-label { display: none; }
+    .wa.ghost span.wa-label { display: inline; }
+    .steps { grid-template-columns: 1fr; }
+    .cols { grid-template-columns: 1fr; gap: 36px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+    p { font-size: 16px; }
+    .pull { padding-left: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001s !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+    .ray { stroke-dashoffset: 0; }
+    .core { opacity: 1; }
   }
 </style>
 </head>
 <body>
 
-  <div class="content">
-    
-    <div class="symbol">
-      <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
+<header>
+  <div class="wrap header-inner">
+    <a href="#topo" class="brand" aria-label="Academia do Consciente, ir para o topo">
+      <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g transform="translate(-90, 0)">
-          <circle cx="0" cy="0" r="48" fill="#FFFFFF"/>
-          <line x1="0" y1="-280" x2="0" y2="-115" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
-          <line x1="280" y1="0" x2="115" y2="0" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
-          <line x1="0" y1="280" x2="0" y2="115" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
-          <line x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
-          <line x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
-          <line x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
-          <line x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="48" fill="#7A5E94"/>
+          <line x1="0" y1="-280" x2="0" y2="-115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="280" y1="0" x2="115" y2="0" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="0" y1="280" x2="0" y2="115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
         </g>
       </svg>
-    </div>
-    
-    <h1 class="logo">
-      academia<br>
-      do consciente<span class="logo-dot">.</span>
-    </h1>
-    
-    <p class="message">Em breve, novidades.</p>
-    <p class="submessage">Enquanto isso, siga nas redes sociais.</p>
-    
-    <div class="divider"></div>
-    
-    <a href="https://www.instagram.com/academiadoconsciente/" target="_blank" rel="noopener noreferrer" class="cta" aria-label="Seguir Academia do Consciente no Instagram">
-      <svg class="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
-        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-      </svg>
-      @academiadoconsciente
+      <span class="brand-name">academia<br>do consciente<span class="dot">.</span></span>
     </a>
-    
+
+    <div class="header-actions">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdown">
+        <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
+        menu
+      </button>
+
+      <a class="wa" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+        <span class="wa-label">whatsapp</span>
+      </a>
+    </div>
   </div>
-  
-  <footer class="footer">
-    <div class="footer-line"></div>
-    <p class="footer-credit">Fernando Segredo</p>
-    <p class="footer-meta">2026</p>
-  </footer>
+</header>
+
+<nav class="dropdown" id="dropdown" aria-label="Navegação principal">
+  <div class="wrap">
+    <ul>
+      <li><a href="#o-que-e">o que é a academia<span class="dot">.</span></a></li>
+      <li><a href="#como-funciona">como funciona<span class="dot">.</span></a></li>
+      <li><a href="#para-quem">para quem é<span class="dot">.</span></a></li>
+      <li><a href="#supervisao">supervisão clínica<span class="dot">.</span></a></li>
+      <li><a href="#supervisores">supervisores<span class="dot">.</span></a></li>
+      <li><a href="#atendimento">atendimento<span class="dot">.</span></a></li>
+      <li><a href="#duvidas">dúvidas<span class="dot">.</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ABERTURA -->
+<div class="hero" id="topo">
+  <div class="hero-symbol">
+    <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(-90, 0)">
+        <circle class="core" cx="0" cy="0" r="48" fill="#FFFFFF"/>
+        <line class="ray r1" x1="0" y1="-280" x2="0" y2="-115" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+        <line class="ray r2" x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
+        <line class="ray r3" x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
+        <line class="ray r4" x1="280" y1="0" x2="115" y2="0" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+        <line class="ray r5" x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
+        <line class="ray r6" x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#FFFFFF" stroke-width="18.7" stroke-linecap="round"/>
+        <line class="ray r7" x1="0" y1="280" x2="0" y2="115" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <p class="hero-logo reveal d2">academia<br>do consciente<span>.</span></p>
+
+  <h1 class="reveal d3">você não precisa saber o que está sentindo para começar<span>.</span></h1>
+
+  <p class="lead reveal d4">Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera.</p>
+
+  <div class="reveal d5">
+    <a class="wa ghost" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+      <span class="wa-label">falar no whatsapp</span>
+    </a>
+    <p class="hero-note">resposta no mesmo dia, em horário comercial</p>
+  </div>
+
+  <span class="scroll-hint reveal d6" aria-hidden="true">role</span>
+</div>
+
+<!-- O QUE É -->
+<section id="o-que-e">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">a academia</span>
+      <h2 class="title">a ponte entre quem procura escuta e quem pode oferecê-la<span class="dot">.</span></h2>
+    </div>
+    <div>
+      <p class="lead">A Academia do Consciente é um serviço de agendamento e apoio administrativo para pessoas que buscam atendimento em psicanálise.</p>
+      <p>Cuidamos do primeiro contato. Entendemos o que você procura, apresentamos os analistas disponíveis e organizamos o agendamento.</p>
+      <p>Trabalhamos com analistas com formação em psicanálise, experiência em atendimento online e fundamentação teórica contemporânea.</p>
+      <p class="pull">o atendimento é realizado por analistas independentes: cada um responde pela própria prática, pelos próprios honorários e pela emissão da respectiva nota fiscal<span class="dot">.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="wrap">
+    <span class="eyebrow">como funciona</span>
+    <h2 class="title">quatro passos, sem formulário e sem cadastro<span class="dot">.</span></h2>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <p>Você chama no WhatsApp.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <p>Conversamos sobre o que você procura, seus horários e o formato do atendimento.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <p>Apresentamos o analista disponível e o valor da sessão.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <p>O agendamento é confirmado. O atendimento acontece online.</p>
+      </div>
+    </div>
+
+    <p class="small steps-note">Da primeira mensagem ao primeiro atendimento, o caminho costuma levar poucos dias.</p>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section id="para-quem" class="voice">
+  <div class="wrap">
+    <span class="eyebrow">para quem é</span>
+    <h2 class="title">o que a gente é, e o que a gente não é<span class="dot">.</span></h2>
+
+    <div class="cols">
+      <div class="col">
+        <p class="col-label">somos</p>
+        <ul>
+          <li>escuta psicanalítica, com analistas em supervisão contínua.</li>
+          <li>atendimento online, com hora marcada.</li>
+          <li>um processo, não uma solução rápida.</li>
+        </ul>
+      </div>
+      <div class="col nao">
+        <p class="col-label">não somos</p>
+        <ul>
+          <li>coaching, mentoria ou autoajuda.</li>
+          <li>atendimento de urgência ou emergência.</li>
+          <li>substituto de acompanhamento médico ou psiquiátrico.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert">
+      <p>Se você está em risco imediato, procure o serviço de saúde mais próximo ou ligue para o <strong>SAMU: 192</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUPERVISÃO -->
+<section id="supervisao">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">supervisão clínica</span>
+      <h2 class="title">nenhum analista trabalha sozinho<span class="dot">.</span></h2>
+    </div>
+    <div>
+      <p class="lead">A prática psicanalítica se sustenta na supervisão contínua. Os analistas que atendem por meio da Academia do Consciente contam com supervisão clínica disponível, individual e coletiva, conduzida por psicanalistas experientes.</p>
+      <p>A supervisão é um espaço de estudo e reflexão sobre a prática, oferecido como apoio ao analista. Ela não interfere na condução do atendimento, que permanece de responsabilidade exclusiva de cada analista, nem envolve acesso a dados identificáveis dos clientes.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- SUPERVISORES -->
+<section id="supervisores">
+  <div class="wrap">
+    <span class="eyebrow">supervisores</span>
+    <h2 class="title">quem sustenta a prática<span class="dot">.</span></h2>
+
+    <div class="people">
+      <article class="person">
+        <img class="person-photo" src="fernando.jpg" alt="Retrato de Fernando Segredo" loading="lazy">
+        <p class="person-role">psicanalista · supervisor clínico</p>
+        <h3 class="sub">fernando segredo<span class="dot">.</span></h3>
+        <p>Psicanalista, master em PNL e hipnoterapeuta. Atende exclusivamente adultos, com foco em ansiedade, burnout, bloqueios emocionais e padrões inconscientes que se repetem mesmo quando a pessoa já entendeu que se repetem.</p>
+        <p>Sua escuta articula psicanálise freudiana, psicologia analítica junguiana, PNL e hipnose ericksoniana: abordagens diferentes a serviço de uma mesma pergunta, a de por que alguém insiste naquilo que diz não querer.</p>
+        <p>Antes da clínica, foram 18 anos em agências de publicidade, um dos mercados mais exigentes e mais ansiosos que existem: prazo curto, cobrança permanente, valor medido pela última entrega. Ele viveu isso de dentro, e leva para o consultório a compreensão de quem conhece por experiência própria o ambiente onde o burnout costuma nascer.</p>
+        <p>Sustenta que consciência não é conforto. É o que devolve à pessoa o direito de ser autora da própria história, inclusive das partes que ela ainda não quis olhar.</p>
+        <a class="person-ig" href="https://www.instagram.com/psifernandosegredo/" target="_blank" rel="noopener noreferrer">@psifernandosegredo</a>
+      </article>
+
+      <article class="person">
+        <!-- SUBSTITUIR pela foto do Adriano: trocar esta div por <img class="person-photo" src="adriano.jpg" alt="Retrato de Adriano Maquiaveli" loading="lazy"> -->
+        <div class="person-photo placeholder" role="img" aria-label="Foto em breve">
+          <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g transform="translate(-90, 0)">
+              <circle cx="0" cy="0" r="48" fill="#7A5E94"/>
+              <line x1="0" y1="-280" x2="0" y2="-115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+              <line x1="280" y1="0" x2="115" y2="0" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+              <line x1="0" y1="280" x2="0" y2="115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+              <line x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+              <line x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+              <line x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+              <line x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <p class="person-role">psicanalista · supervisor clínico</p>
+        <h3 class="sub">adriano maquiaveli<span class="dot">.</span></h3>
+        <p>Psicanalista clínico com mais de 12 anos de experiência, professor em curso de formação em psicanálise e supervisor de terapeutas em atuação. Especialista em técnicas de acesso direto ao inconsciente, trabalha com um processo estruturado e acolhedor: existe pessoa antes de existir caso, e cada uma chega com dores singulares.</p>
+        <p>Atende adultos e casais em questões de estresse, ansiedade, angústia, tristeza, excesso de controle, problemas de relacionamento e bloqueios emocionais.</p>
+        <p>Antes da clínica, foram mais de 23 anos como gestor de projetos em grandes multinacionais. Essa passagem permite conversar com executivos e líderes na linguagem do mundo dos negócios, entendendo como essa rotina atravessa a vida profissional e a pessoal.</p>
+        <p>Para ele, a análise é o lugar de compreender o que ainda não se sabe de si e traduzir em palavras aquilo que é sentimento, para ampliar a consciência sobre as próprias escolhas. Quando a lógica não dá conta do peso emocional, o primeiro passo é falar e se escutar. Agir vem depois.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ATENDIMENTO -->
+<section id="atendimento">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">atendimento</span>
+      <h2 class="title">online, com hora marcada<span class="dot">.</span></h2>
+    </div>
+    <div>
+      <p class="lead">Todo o atendimento é realizado online, mediante agendamento prévio. Não realizamos atendimento presencial e não atendemos situações de urgência ou emergência.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DÚVIDAS -->
+<section id="duvidas" class="voice">
+  <div class="wrap">
+    <span class="eyebrow">dúvidas</span>
+    <h2 class="title">o que costumam perguntar<span class="dot">.</span></h2>
+
+    <div class="faq">
+      <details>
+        <summary>quanto custa uma sessão?</summary>
+        <div class="answer"><p>O valor é definido por cada analista. Informamos antes de qualquer agendamento, no primeiro contato pelo WhatsApp.</p></div>
+      </details>
+
+      <details>
+        <summary>quanto tempo dura uma sessão?</summary>
+        <div class="answer"><p>50 minutos.</p></div>
+      </details>
+
+      <details>
+        <summary>com que frequência acontecem os atendimentos?</summary>
+        <div class="answer"><p>Semanal ou quinzenal, conforme o combinado entre você e o analista.</p></div>
+      </details>
+
+      <details>
+        <summary>como escolho o analista?</summary>
+        <div class="answer"><p>Você não escolhe sozinho e não escolhe às cegas. A partir da conversa inicial, apresentamos o analista com disponibilidade e perfil compatíveis com o que você procura.</p></div>
+      </details>
+
+      <details>
+        <summary>posso trocar de analista?</summary>
+        <div class="answer"><p>Pode. É só falar com a gente.</p></div>
+      </details>
+
+      <details>
+        <summary>psicanálise é a mesma coisa que terapia?</summary>
+        <div class="answer"><p>São coisas próximas, mas não idênticas. "Terapia" é um nome amplo, que cobre abordagens diferentes. A psicanálise é uma delas, e o que a distingue é o método: em vez de técnicas e tarefas, ela trabalha com a sua fala e com o que ela revela sem que você perceba. Por isso não existe um número de sessões definido. O processo tem o tempo de cada um.</p></div>
+      </details>
+
+      <details>
+        <summary>vocês têm acesso ao que eu falo nas sessões?</summary>
+        <div class="answer"><p>Não. O que é dito no atendimento fica entre você e o analista. Cuidamos apenas do agendamento.</p></div>
+      </details>
+
+      <details>
+        <summary>emitem nota fiscal?</summary>
+        <div class="answer"><p>A nota fiscal é emitida pelo analista que realiza o atendimento.</p></div>
+      </details>
+
+      <details>
+        <summary>atendem plano de saúde?</summary>
+        <div class="answer"><p>Não. O atendimento é particular.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CHAMADA FINAL -->
+<div class="closing">
+  <h2>a consciência ilumina parte. o resto continua sendo trabalhado<span class="dot">.</span></h2>
+  <a class="wa ghost" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+    <span class="wa-label">falar no whatsapp</span>
+  </a>
+</div>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="translate(-90, 0)">
+            <circle cx="0" cy="0" r="48" fill="#7A5E94"/>
+            <line x1="0" y1="-280" x2="0" y2="-115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+            <line x1="280" y1="0" x2="115" y2="0" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+            <line x1="0" y1="280" x2="0" y2="115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+            <line x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+            <line x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+            <line x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+            <line x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <p class="footer-name">academia<br>do consciente<span class="dot">.</span></p>
+      </div>
+
+      <div class="footer-contact">
+        <p>
+          São Caetano do Sul, SP<br>
+          WhatsApp: <a href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">(11) 93287-2067</a><br>
+          <a href="mailto:agendamento@academiadoconsciente.com.br">agendamento@academiadoconsciente.com.br</a><br>
+          CNPJ 68.111.312/0001-06
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <p>Academia do Consciente é uma marca operada por Tatiana Cristina Franzotti Maquiaveli, CNPJ 68.111.312/0001-06, responsável pelo agendamento e apoio administrativo entre clientes e analistas independentes.</p>
+      <div class="footer-links">
+        <a href="politica-de-privacidade.html">política de privacidade</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://www.instagram.com/academiadoconsciente/" target="_blank" rel="noopener noreferrer">@academiadoconsciente</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>2026</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById('menuBtn');
+    var dd = document.getElementById('dropdown');
+
+    function close() {
+      dd.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function () {
+      var open = dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    dd.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dd.contains(e.target) && !btn.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); btn.focus(); }
+    });
+
+    var head = document.querySelector('header');
+    var ticking = false;
+
+    function sync() {
+      var passed = window.scrollY > window.innerHeight * 0.45;
+      head.classList.toggle('scrolled', passed);
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(sync); ticking = true; }
+    }, { passive: true });
+
+    sync();
+  })();
+</script>
 
 </body>
 </html>

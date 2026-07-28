@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — Academia do Consciente</title>
+<meta name="description" content="Como a Academia do Consciente trata os dados de quem procura atendimento.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F5F1EA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --lilas: #9D7EB8;
+    --lilas-escuro: #7A5E94;
+    --creme: #F5F1EA;
+    --creme-fundo: #EFEAE1;
+    --grafite: #3A3A3A;
+    --cinza: #77787B;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --header-h: 72px;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--creme);
+    color: var(--grafite);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--lilas); color: #fff; }
+
+  .dot { color: var(--lilas); }
+
+  .wrap { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  header {
+    position: sticky;
+    top: 0;
+    height: var(--header-h);
+    background: rgba(245, 241, 234, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.08);
+    z-index: 10;
+  }
+
+  .header-inner {
+    height: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand svg { width: 26px; height: 26px; }
+  .brand-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: 17px;
+    line-height: 0.95;
+    color: var(--grafite);
+  }
+
+  .back {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cinza);
+    text-decoration: none;
+    border: 1px solid rgba(58, 58, 58, 0.18);
+    border-radius: 100px;
+    padding: 9px 18px;
+    transition: border-color 0.25s ease, color 0.25s ease;
+    white-space: nowrap;
+  }
+  .back:hover { border-color: var(--lilas); color: var(--lilas-escuro); }
+
+  main { padding: clamp(56px, 9vw, 96px) 0 clamp(64px, 9vw, 110px); }
+
+  .eyebrow {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lilas-escuro);
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: clamp(32px, 6vw, 52px);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+
+  .updated { font-size: 13px; color: var(--cinza); letter-spacing: 0.5px; }
+
+  .divider { height: 1px; background: rgba(58, 58, 58, 0.12); margin: 48px 0; border: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: clamp(21px, 3vw, 26px);
+    line-height: 1.15;
+    margin: 48px 0 16px;
+  }
+
+  h2:first-of-type { margin-top: 0; }
+
+  p { font-size: 16.5px; margin-bottom: 16px; }
+
+  ul { margin: 0 0 18px; padding: 0; list-style: none; }
+  li {
+    font-size: 16.5px;
+    line-height: 1.6;
+    padding: 7px 0 7px 22px;
+    position: relative;
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 17px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--lilas);
+  }
+
+  a { color: var(--lilas-escuro); }
+
+  .contact-card {
+    background: var(--creme-fundo);
+    padding: 30px 32px;
+    margin-top: 12px;
+  }
+  .contact-card p { margin: 0; line-height: 1.9; font-size: 15.5px; }
+
+  footer {
+    background: var(--creme-fundo);
+    padding: 44px 0;
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+  .footer-links a { color: var(--cinza); text-decoration: none; }
+  .footer-links a:hover { color: var(--lilas-escuro); }
+  .footer-links .sep { color: var(--lilas); opacity: 0.6; }
+
+  a:focus-visible {
+    outline: 2px solid var(--lilas-escuro);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 620px) {
+    :root { --header-h: 64px; }
+    .brand-name { display: none; }
+    p, li { font-size: 16px; }
+    .contact-card { padding: 24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="Academia do Consciente, voltar para o início">
+      <svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(-90, 0)">
+          <circle cx="0" cy="0" r="48" fill="#7A5E94"/>
+          <line x1="0" y1="-280" x2="0" y2="-115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="280" y1="0" x2="115" y2="0" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="0" y1="280" x2="0" y2="115" stroke="#7A5E94" stroke-width="22" stroke-linecap="round"/>
+          <line x1="140" y1="-242.5" x2="57.5" y2="-99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="242.5" y1="-140" x2="99.6" y2="-57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="242.5" y1="140" x2="99.6" y2="57.5" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+          <line x1="140" y1="242.5" x2="57.5" y2="99.6" stroke="#7A5E94" stroke-width="18.7" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <span class="brand-name">academia<br>do consciente<span class="dot">.</span></span>
+    </a>
+    <a class="back" href="index.html">voltar ao início</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <span class="eyebrow">documento</span>
+    <h1>política de privacidade<span class="dot">.</span></h1>
+    <p class="updated">Última atualização: 28/07/2026</p>
+
+    <hr class="divider">
+
+    <h2>1. quem somos</h2>
+    <p>Esta política se aplica ao site academiadoconsciente.com.br e ao atendimento realizado pelos nossos canais de contato, incluindo WhatsApp, Instagram e Facebook.</p>
+    <p>O responsável pelo tratamento dos seus dados é Tatiana Cristina Franzotti Maquiaveli, CNPJ 68.111.312/0001-06, com sede em São Caetano do Sul, SP.</p>
+    <p>Contato para assuntos de privacidade: <a href="mailto:agendamento@academiadoconsciente.com.br">agendamento@academiadoconsciente.com.br</a></p>
+
+    <h2>2. quais dados coletamos</h2>
+    <p>Coletamos apenas o necessário para agendar seu atendimento:</p>
+    <ul>
+      <li>Nome</li>
+      <li>Telefone</li>
+      <li>E-mail, quando informado</li>
+      <li>Preferências de horário e formato de atendimento</li>
+      <li>Histórico das conversas de agendamento conosco</li>
+      <li>Dados informados por você em formulários de contato em nossas redes sociais, quando utilizados</li>
+      <li>Dados informados por você para emissão de Notas Fiscais pelos terapeutas</li>
+    </ul>
+
+    <h2>3. o que não coletamos</h2>
+    <p>Não coletamos, não solicitamos e não temos acesso ao conteúdo das suas sessões. O que é dito durante o atendimento fica entre você e o analista, protegido pelo sigilo profissional.</p>
+    <p>Não solicitamos dados de saúde, diagnósticos, laudos ou histórico clínico. Se você mencionar espontaneamente informações desse tipo durante o contato, elas serão usadas apenas para direcionar o agendamento ao analista adequado, e não serão compartilhadas com terceiros além do analista escolhido.</p>
+
+    <h2>4. para que usamos seus dados</h2>
+    <ul>
+      <li>Responder ao seu contato</li>
+      <li>Entender o que você procura e apresentar analistas disponíveis</li>
+      <li>Realizar e confirmar o agendamento</li>
+      <li>Enviar lembretes e comunicados sobre suas sessões</li>
+      <li>Cumprir obrigações legais</li>
+    </ul>
+    <p>Não vendemos seus dados. Não usamos seus dados para publicidade de terceiros.</p>
+
+    <h2>5. base legal</h2>
+    <p>Tratamos seus dados com base no seu consentimento e na execução de procedimentos preliminares ao serviço que você solicitou, conforme a Lei Geral de Proteção de Dados, Lei 13.709/2018.</p>
+    <p>Caso você informe espontaneamente dados considerados sensíveis, o tratamento ocorre exclusivamente com base no seu consentimento, e apenas para a finalidade de agendamento.</p>
+
+    <h2>6. com quem compartilhamos</h2>
+    <p>Compartilhamos seus dados apenas com:</p>
+    <ul>
+      <li>O analista escolhido por você, para viabilizar o atendimento. O analista é um profissional independente e responde pelo próprio tratamento de dados a partir do momento em que o atendimento se inicia.</li>
+      <li>Fornecedores de tecnologia que usamos para operar o agendamento, como a plataforma de mensagens WhatsApp, da Meta, e o sistema de gestão de atendimento que utilizamos. Esses fornecedores tratam os dados exclusivamente em nosso nome.</li>
+      <li>Autoridades públicas, quando houver obrigação legal ou ordem judicial.</li>
+    </ul>
+    <p>Não compartilhamos seus dados com anunciantes, corretores de dados ou qualquer terceiro com finalidade comercial.</p>
+
+    <h2>7. supervisão clínica</h2>
+    <p>Os analistas contam com supervisão clínica como apoio à própria prática. A supervisão trata de aspectos técnicos e teóricos do trabalho do analista e não envolve acesso aos seus dados identificáveis nem ao conteúdo das suas sessões.</p>
+
+    <h2>8. por quanto tempo guardamos</h2>
+    <p>Mantemos seus dados enquanto durar o relacionamento de agendamento e pelo prazo necessário ao cumprimento de obrigações legais. Depois disso, os dados são eliminados ou anonimizados.</p>
+    <p>Você pode solicitar a exclusão a qualquer momento, ressalvadas as informações que a lei nos obrigue a manter.</p>
+
+    <h2>9. segurança</h2>
+    <p>Adotamos medidas técnicas e administrativas para proteger seus dados, incluindo acesso restrito às pessoas envolvidas no agendamento, uso de canais oficiais de comunicação e conexão segura no site.</p>
+    <p>Nenhum sistema é totalmente imune a incidentes. Caso ocorra um incidente de segurança relevante, comunicaremos você e a Autoridade Nacional de Proteção de Dados, conforme a lei.</p>
+
+    <h2>10. seus direitos</h2>
+    <p>Você pode, a qualquer momento:</p>
+    <ul>
+      <li>Confirmar se tratamos seus dados</li>
+      <li>Acessar seus dados</li>
+      <li>Corrigir dados incompletos ou desatualizados</li>
+      <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários</li>
+      <li>Solicitar a portabilidade dos seus dados</li>
+      <li>Revogar o consentimento</li>
+      <li>Se opor a um tratamento realizado sem consentimento</li>
+      <li>Obter informação sobre com quem compartilhamos seus dados</li>
+    </ul>
+    <p>Para exercer qualquer desses direitos, escreva para <a href="mailto:agendamento@academiadoconsciente.com.br">agendamento@academiadoconsciente.com.br</a>. Responderemos no menor prazo possível.</p>
+
+    <h2>11. comunicação por whatsapp</h2>
+    <p>Ao nos enviar mensagem pelo WhatsApp, você concorda que utilizemos esse canal para responder, agendar e enviar lembretes sobre suas sessões.</p>
+    <p>Você pode pedir a interrupção dessas comunicações a qualquer momento, respondendo à conversa ou escrevendo para nosso e-mail.</p>
+
+    <h2>12. cookies</h2>
+    <p>Nosso site utiliza apenas os cookies necessários ao seu funcionamento. Não utilizamos cookies de publicidade. Você pode bloquear cookies nas configurações do seu navegador.</p>
+
+    <h2>13. menores de idade</h2>
+    <p>Nossos serviços são destinados a maiores de 18 anos. Não realizamos agendamento para menores de idade e não coletamos dados de crianças e adolescentes de forma intencional. Se identificarmos esse tipo de dado, ele será eliminado.</p>
+
+    <h2>14. alterações nesta política</h2>
+    <p>Podemos atualizar esta política. A data da última atualização aparece no topo da página. Alterações relevantes serão comunicadas pelos nossos canais de contato.</p>
+
+    <h2>15. contato</h2>
+    <div class="contact-card">
+      <p>
+        Academia do Consciente<br>
+        Tatiana Cristina Franzotti Maquiaveli<br>
+        CNPJ 68.111.312/0001-06<br>
+        São Caetano do Sul, SP<br>
+        E-mail: <a href="mailto:agendamento@academiadoconsciente.com.br">agendamento@academiadoconsciente.com.br</a><br>
+        WhatsApp: <a href="https://wa.me/5511932872067" target="_blank" rel="noopener noreferrer">(11) 93287-2067</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html">início</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="https://www.instagram.com/academiadoconsciente/" target="_blank" rel="noopener noreferrer">@academiadoconsciente</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
