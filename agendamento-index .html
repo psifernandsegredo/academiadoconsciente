@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>Agendamento · Academia do Consciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#F5F1EA; --bg2:#EDE6F3; --card:#FBF9F4; --borda:#E2DBCD;
+    --texto:#3A3A3A; --texto2:#77787B;
+    --lilas:#9D7EB8; --lilas-esc:#7A5E94; --lilas-suave:#EDE6F3;
+    --erro:#C46A6A; --ok-bg:#7A5E94; --ok-texto:#FBF9F4; --zap:#1DA851;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#232126; --bg2:#2B2733; --card:#2C2A31; --borda:#403C48;
+      --texto:#EDEAE4; --texto2:#A7A4AD;
+      --lilas:#C9A8D9; --lilas-esc:#B393C9; --lilas-suave:#3A3442;
+      --erro:#E09B9B; --ok-bg:#C9A8D9; --ok-texto:#232126; --zap:#2BC162;
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',sans-serif; color:var(--texto); font-size:16px; line-height:1.55;
+    background:linear-gradient(150deg, var(--bg) 55%, var(--bg2) 100%);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+
+  header{padding:calc(14px + env(safe-area-inset-top)) 20px 10px; flex:none}
+  .logo{display:flex; align-items:center; gap:9px}
+  .logo svg{width:26px; height:26px}
+  .logo span{font-family:'Playfair Display',serif; font-style:italic; font-weight:900; font-size:.98rem}
+  .logo b{color:var(--lilas); font-weight:900}
+  .prog{margin-top:12px; height:4px; background:var(--borda); border-radius:4px; overflow:hidden}
+  .prog i{display:block; height:100%; width:0%; background:var(--lilas); border-radius:4px; transition:width .45s ease}
+  .prog-rot{font-size:.68rem; color:var(--texto2); margin-top:5px; text-align:right; min-height:1em}
+
+  main{flex:1; position:relative; overflow:hidden}
+  .tela{
+    position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
+    padding:20px 24px 120px; max-width:660px; margin:0 auto; width:100%;
+    opacity:0; transform:translateY(28px); pointer-events:none;
+    transition:opacity .35s ease, transform .35s ease; overflow-y:auto;
+  }
+  .tela.ativa{opacity:1; transform:none; pointer-events:auto}
+  .tela.saiu{opacity:0; transform:translateY(-28px)}
+  .tela.alta{justify-content:flex-start; padding-top:26px}
+
+  .num{font-size:.78rem; font-weight:600; color:var(--lilas-esc); margin-bottom:10px}
+  h1{font-family:'Playfair Display',serif; font-style:italic; font-weight:900;
+     font-size:1.6rem; line-height:1.24; margin-bottom:14px}
+  h2{font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
+     font-size:1.42rem; line-height:1.25; margin-bottom:6px}
+  .ajuda{color:var(--texto2); font-size:.92rem; margin-bottom:20px}
+  .texto p{font-size:.93rem; margin-bottom:12px}
+  .texto .mini{color:var(--texto2); font-size:.8rem}
+  .texto b{color:var(--lilas-esc); font-weight:700}
+  .preco{font-family:'Playfair Display',serif; font-style:italic; font-weight:900;
+         font-size:1.5rem; color:var(--texto); margin:6px 0 12px}
+  .preco small{font-family:'Inter',sans-serif; font-style:normal; font-weight:500;
+               font-size:.8rem; color:var(--texto2)}
+
+  input, textarea{
+    width:100%; font-family:'Inter',sans-serif; font-size:1.2rem; color:var(--texto);
+    background:transparent; border:none; border-bottom:2px solid var(--borda);
+    padding:8px 2px 10px; outline:none; border-radius:0; resize:none;
+  }
+  textarea{font-size:1.05rem; line-height:1.6; min-height:96px}
+  input::placeholder, textarea::placeholder{color:var(--texto2); opacity:.55}
+  input:focus, textarea:focus{border-bottom-color:var(--lilas)}
+
+  .ops{display:flex; flex-direction:column; gap:10px}
+  .op{
+    display:flex; align-items:center; gap:12px; text-align:left; width:100%;
+    background:var(--card); border:1.5px solid var(--borda); border-radius:13px;
+    padding:13px 15px; font-family:'Inter',sans-serif; font-size:.96rem; font-weight:500;
+    color:var(--texto); cursor:pointer; transition:border-color .15s;
+  }
+  .op:hover{border-color:var(--lilas)}
+  .op.marcada{border-color:var(--lilas); background:var(--lilas-suave)}
+  .op .tecla{
+    flex:none; width:26px; height:26px; border:1.5px solid var(--borda); border-radius:7px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.72rem; font-weight:700; color:var(--texto2);
+  }
+  .op.marcada .tecla{background:var(--lilas); border-color:var(--lilas); color:var(--card)}
+
+  .escala{display:grid; grid-template-columns:repeat(11, 1fr); gap:6px}
+  .escala button{
+    aspect-ratio:1; border-radius:10px; border:1.5px solid var(--borda);
+    background:var(--card); color:var(--texto); font-family:'Inter',sans-serif;
+    font-size:.9rem; font-weight:600; cursor:pointer;
+  }
+  .escala button.marcada{background:var(--lilas); border-color:var(--lilas); color:var(--card)}
+  .escala-rotulos{display:flex; justify-content:space-between; font-size:.72rem;
+                  color:var(--texto2); margin-top:8px}
+
+  .erro{color:var(--erro); font-size:.82rem; margin-top:10px; min-height:1.2em; opacity:0; transition:opacity .2s}
+  .erro.mostra{opacity:1}
+
+  .acao{margin-top:24px; display:flex; align-items:center; gap:14px}
+  .btn{
+    font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; cursor:pointer;
+    background:var(--ok-bg); color:var(--ok-texto); border:none; border-radius:12px;
+    padding:13px 26px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn.grande{font-size:1.05rem; padding:15px 30px}
+  .btn-zap{
+    background:var(--zap); color:#fff; font-size:1.05rem; padding:16px 26px;
+    border-radius:14px; width:100%; justify-content:center;
+  }
+  .btn-zap svg{width:22px; height:22px; flex:none}
+  .enter-dica{font-size:.75rem; color:var(--texto2)}
+  @media (hover:none){ .enter-dica{display:none} }
+
+  /* virada: fotos */
+  .duo{display:flex; justify-content:center; gap:26px; margin:8px 0 18px}
+  .pessoa{text-align:center}
+  .pessoa .aro{
+    width:128px; height:128px; border-radius:50%; padding:4px;
+    background:linear-gradient(140deg, var(--lilas), var(--bg2));
+    box-shadow:0 10px 26px rgba(122,94,148,.22);
+  }
+  .pessoa img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block}
+  .pessoa .nome{font-family:'Playfair Display',serif; font-style:italic; font-weight:900;
+                font-size:.98rem; margin-top:10px}
+  .pessoa .nome b{color:var(--lilas)}
+  .pessoa .papel{font-size:.6rem; letter-spacing:.09em; text-transform:uppercase;
+                 color:var(--texto2); margin-top:2px}
+  .virada-frase{
+    border-left:3px solid var(--lilas); padding:2px 0 2px 14px; margin:14px 0;
+    font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
+    font-size:1.05rem; line-height:1.4;
+  }
+
+  .nav{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:flex; gap:8px; z-index:5}
+  .nav button{
+    width:44px; height:44px; border-radius:11px; border:none; cursor:pointer;
+    background:var(--ok-bg); color:var(--ok-texto); font-size:1.15rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center; transition:opacity .2s;
+  }
+  .nav button:disabled{opacity:.35; cursor:default}
+  .marca-rodape{position:fixed; left:20px; bottom:calc(20px + env(safe-area-inset-bottom));
+                font-size:.68rem; color:var(--texto2); z-index:5}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="70" cy="100" r="17" fill="var(--lilas)"/>
+      <g stroke="var(--lilas)" stroke-linecap="round">
+        <line x1="70" y1="58" x2="70" y2="30" stroke-width="7"/>
+        <line x1="91" y1="63.6" x2="105" y2="39.4" stroke-width="6"/>
+        <line x1="106.4" y1="79" x2="130.6" y2="65" stroke-width="6"/>
+        <line x1="112" y1="100" x2="140" y2="100" stroke-width="7"/>
+        <line x1="106.4" y1="121" x2="130.6" y2="135" stroke-width="6"/>
+        <line x1="91" y1="136.4" x2="105" y2="160.6" stroke-width="6"/>
+        <line x1="70" y1="142" x2="70" y2="170" stroke-width="7"/>
+      </g>
+    </svg>
+    <span>academia do consciente<b>.</b></span>
+  </div>
+  <div class="prog"><i id="barra"></i></div>
+  <div class="prog-rot" id="pct"></div>
+</header>
+
+<main>
+
+<!-- ============ TRONCO ============ -->
+
+<section class="tela ativa texto" data-id="inicio" data-p="0">
+  <h1>Você não precisa saber o que está sentindo para começar.</h1>
+  <p>Se você chegou até aqui, alguma coisa te trouxe. Pode ser um incômodo que você já sabe nomear, pode ser só um cansaço que não passa, ou aquela sensação de que algo não está no lugar e você não consegue explicar direito. Está tudo bem chegar sem saber.</p>
+  <p>Este formulário existe por um motivo simples: a gente não quer que você conte a sua história pela primeira vez para um desconhecido. Quando você marcar a sua sessão, a pessoa que vai te escutar já vai ter lido o que você escreveu aqui.</p>
+  <p>O atendimento é feito por analistas com formação em psicanálise, que trabalham sob supervisão clínica contínua de Fernando Segredo e Adriano Maquiaveli. Ou seja, você não vai ser atendido por alguém sozinho, decidindo por conta própria. Existe um time acompanhando o trabalho por trás.</p>
+  <p class="mini">São cerca de três minutos. Não é um teste, não existe resposta certa e ninguém vai te julgar por nada do que escrever.</p>
+  <div class="acao"><button class="btn grande" onclick="avancar()">Começar</button><span class="enter-dica">ou pressione Enter ↵</span></div>
+</section>
+
+<section class="tela" data-id="nome" data-p="4">
+  <div class="num">1 →</div>
+  <h2>Como você se chama?</h2>
+  <input id="c-nome" type="text" placeholder="Digite aqui..." autocomplete="given-name">
+  <div class="erro">Pode escrever seu nome? É como a gente vai te chamar.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button><span class="enter-dica">pressione Enter ↵</span></div>
+</section>
+
+<section class="tela" data-id="quem" data-p="8">
+  <div class="num">2 →</div>
+  <h2>Este atendimento é para quem?</h2>
+  <div class="ops" data-chave="quem" data-avanca="1">
+    <button class="op" data-v="Para mim"><span class="tecla">A</span>Para mim</button>
+    <button class="op" data-v="Para nós dois, em terapia de casal"><span class="tecla">B</span>Para nós dois, em terapia de casal</button>
+    <button class="op" data-v="Para outra pessoa"><span class="tecla">C</span>Para outra pessoa</button>
+  </div>
+  <div class="erro">Escolha uma das opções para continuar.</div>
+</section>
+
+<section class="tela" data-id="zap" data-p="12">
+  <div class="num">3 →</div>
+  <h2>Qual o seu WhatsApp?</h2>
+  <div class="ajuda">Com DDD. É por ele que a gente vai conversar com você.</div>
+  <input id="c-zap" type="tel" inputmode="numeric" placeholder="(11) 99999-9999" autocomplete="tel">
+  <div class="erro">Confere o número? Precisa do DDD e do celular completo.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button><span class="enter-dica">pressione Enter ↵</span></div>
+</section>
+
+<section class="tela" data-id="email" data-p="16">
+  <div class="num">4 →</div>
+  <h2>E o seu e-mail?</h2>
+  <div class="ajuda">Só para o caso de o WhatsApp não funcionar.</div>
+  <input id="c-email" type="email" inputmode="email" placeholder="voce@email.com" autocomplete="email">
+  <div class="erro">Esse e-mail não parece completo. Dá uma conferida?</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button><span class="enter-dica">pressione Enter ↵</span></div>
+</section>
+
+<!-- ============ TRILHA INDIVIDUAL ============ -->
+
+<section class="tela" data-id="i-traz" data-p="24">
+  <div class="num">5 →</div>
+  <h2 id="t-traz">O que está te trazendo aqui?</h2>
+  <div class="ajuda">Escreva do seu jeito, do jeito que sair. Pode ser uma frase ou vários parágrafos. Não precisa fazer sentido para mais ninguém além de você.</div>
+  <textarea id="c-traz" placeholder="Pode começar por qualquer ponto..."></textarea>
+  <div class="erro">Escreve um pouquinho? É a parte mais importante de todas.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-pesa" data-p="30">
+  <div class="num">6 →</div>
+  <h2>Onde isso tem pesado mais?</h2>
+  <div class="ajuda">Marque quantas quiser. Não existe resposta demais.</div>
+  <div class="ops" data-chave="pesa" data-multi="1">
+    <button class="op" data-v="No sono"><span class="tecla">A</span>No sono</button>
+    <button class="op" data-v="No trabalho ou nos estudos"><span class="tecla">B</span>No trabalho ou nos estudos</button>
+    <button class="op" data-v="Nas relações"><span class="tecla">C</span>Nas relações</button>
+    <button class="op" data-v="Na saúde"><span class="tecla">D</span>Na saúde</button>
+    <button class="op" data-v="Na vontade de sair de casa"><span class="tecla">E</span>Na vontade de sair de casa</button>
+    <button class="op" data-v="Na relação comigo mesmo"><span class="tecla">F</span>Na relação comigo mesmo</button>
+  </div>
+  <div class="erro">Marca pelo menos uma, do jeito que fizer mais sentido.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-tempo" data-p="36">
+  <div class="num">7 →</div>
+  <h2>Há quanto tempo isso vem acontecendo?</h2>
+  <div class="ops" data-chave="tempo" data-avanca="1">
+    <button class="op" data-v="Há poucas semanas"><span class="tecla">A</span>Há poucas semanas</button>
+    <button class="op" data-v="Há alguns meses"><span class="tecla">B</span>Há alguns meses</button>
+    <button class="op" data-v="Há mais de um ano"><span class="tecla">C</span>Há mais de um ano</button>
+    <button class="op" data-v="Há tanto tempo que eu nem lembro"><span class="tecla">D</span>Há tanto tempo que eu nem lembro</button>
+  </div>
+  <div class="erro">Escolha a opção que chegar mais perto.</div>
+</section>
+
+<section class="tela" data-id="i-escala" data-p="42">
+  <div class="num">8 →</div>
+  <h2>De 0 a 10, quanto isso pesa hoje?</h2>
+  <div class="ajuda">Não precisa ser exato. Vale o número que veio primeiro.</div>
+  <div class="escala" data-chave="escala"></div>
+  <div class="escala-rotulos"><span>quase não pesa</span><span>pesa muito</span></div>
+  <div class="erro">Toca no número que representar o peso de hoje.</div>
+</section>
+
+<section class="tela" data-id="i-agora" data-p="48">
+  <div class="num">9 →</div>
+  <h2>O que te fez procurar agora, e não há seis meses?</h2>
+  <div class="ajuda">Pode ser um evento específico, uma sensação que cresceu, uma conversa. Vale o que veio à mente.</div>
+  <textarea id="c-agora" placeholder="Digite aqui..."></textarea>
+  <div class="erro">Conta um pouquinho? Essa resposta ajuda muito quem vai te escutar.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-espera" data-p="54">
+  <div class="num">10 →</div>
+  <h2>O que você espera que mude nas próximas semanas ou meses?</h2>
+  <div class="ajuda">Não precisa ser uma meta grande. Pode ser algo pequeno que você gostaria de sentir diferente.</div>
+  <textarea id="c-espera" placeholder="Digite aqui..."></textarea>
+  <div class="erro">Escreve o que vier, mesmo que pareça pequeno.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-hist" data-p="60">
+  <div class="num">11 →</div>
+  <h2>Você já fez terapia ou análise antes?</h2>
+  <div class="ops" data-chave="hist" data-avanca="1">
+    <button class="op" data-v="Nunca fiz"><span class="tecla">A</span>Nunca fiz</button>
+    <button class="op" data-v="Já fiz e parei"><span class="tecla">B</span>Já fiz e parei</button>
+    <button class="op" data-v="Faço atualmente"><span class="tecla">C</span>Faço atualmente</button>
+  </div>
+  <div class="erro">Escolha uma das opções.</div>
+</section>
+
+<section class="tela" data-id="i-parei-tempo" data-p="63">
+  <div class="num">↳</div>
+  <h2>Por quanto tempo você fez?</h2>
+  <div class="ops" data-chave="histTempo" data-avanca="1">
+    <button class="op" data-v="Menos de seis meses"><span class="tecla">A</span>Menos de seis meses</button>
+    <button class="op" data-v="De seis meses a um ano"><span class="tecla">B</span>De seis meses a um ano</button>
+    <button class="op" data-v="De um a três anos"><span class="tecla">C</span>De um a três anos</button>
+    <button class="op" data-v="Mais de três anos"><span class="tecla">D</span>Mais de três anos</button>
+  </div>
+  <div class="erro">Escolha a opção que chegar mais perto.</div>
+</section>
+
+<section class="tela" data-id="i-parei-motivo" data-p="66">
+  <div class="num">↳</div>
+  <h2>O que fez você parar?</h2>
+  <div class="ajuda">Não precisa ser uma resposta comprida. Só o essencial. E se preferir pular, tudo bem.</div>
+  <textarea id="c-parei-motivo" placeholder="Digite aqui, ou toque em OK para pular..."></textarea>
+  <div class="erro"></div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-atual-tempo" data-p="63">
+  <div class="num">↳</div>
+  <h2>Há quanto tempo?</h2>
+  <div class="ops" data-chave="histTempo" data-avanca="1">
+    <button class="op" data-v="Menos de seis meses"><span class="tecla">A</span>Menos de seis meses</button>
+    <button class="op" data-v="De seis meses a um ano"><span class="tecla">B</span>De seis meses a um ano</button>
+    <button class="op" data-v="Mais de um ano"><span class="tecla">C</span>Mais de um ano</button>
+  </div>
+  <div class="erro">Escolha a opção que chegar mais perto.</div>
+</section>
+
+<section class="tela" data-id="i-atual-motivo" data-p="66">
+  <div class="num">↳</div>
+  <h2>O que te faz procurar outro caminho agora?</h2>
+  <div class="ajuda">Se preferir pular, tudo bem.</div>
+  <textarea id="c-atual-motivo" placeholder="Digite aqui, ou toque em OK para pular..."></textarea>
+  <div class="erro"></div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela alta texto" data-id="i-virada" data-p="72">
+  <div class="duo">
+    <div class="pessoa">
+      <div class="aro"><img src="/fernando.jpg" alt="Fernando Segredo"></div>
+      <div class="nome">fernando segredo<b>.</b></div>
+      <div class="papel">Psicanalista · Supervisor</div>
+    </div>
+    <div class="pessoa">
+      <div class="aro"><img src="/adriano.jpg" alt="Adriano Maquiaveli"></div>
+      <div class="nome">adriano maquiaveli<b>.</b></div>
+      <div class="papel">Psicanalista · Supervisor</div>
+    </div>
+  </div>
+  <h2 id="t-virada">Quem vai te escutar.</h2>
+  <p>Obrigado por escrever até aqui. Não é fácil colocar em palavras o que está doendo, e você acabou de fazer isso.</p>
+  <p>O que você escreveu vai ser lido com atenção, <b>por gente, não por sistema</b>. É a partir daí que a gente entende o que está acontecendo e escolhe quem é o analista certo para conduzir a primeira sessão. Não é sorteio e não é fila. É leitura.</p>
+  <p>A Academia do Consciente é uma ponte entre quem procura escuta e quem pode escutar. Os atendimentos são feitos por analistas com formação em psicanálise, todos em <b>supervisão clínica contínua</b> com Fernando Segredo e Adriano Maquiaveli, que também é professor em formação de psicanalistas.</p>
+  <p>Supervisão contínua quer dizer que o caso não fica trancado com uma pessoa só. Ele é acompanhado, discutido e revisto por quem tem mais tempo de clínica. Se o analista trava, ele tem para quem levar. Se o caminho precisa mudar, alguém percebe. É a diferença entre ser atendido por um profissional e <b>ser cuidado por uma estrutura</b>.</p>
+  <p>Vale dizer uma coisa que quase ninguém diz: sofrimento que se arrasta não costuma passar sozinho. Ele se acomoda. A pessoa se acostuma a viver com um peso a mais e chama isso de normal. O que muda o jogo não é uma conversa isolada, é o acompanhamento, o encontro que se repete e vai desmontando aquilo aos poucos.</p>
+  <div class="virada-frase">Não existe cura em uma sessão, e a gente não vai te prometer isso. Existe começo. E o começo já muda alguma coisa.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">Continuar</button></div>
+</section>
+
+<section class="tela alta texto" data-id="i-valor" data-p="80">
+  <h2>A sessão inicial.</h2>
+  <p id="t-valor">Você acabou de contar o que está pesando. O próximo passo é ser escutado de verdade.</p>
+  <p>A sessão inicial é uma hora inteira, só sua, com um analista <b>escolhido a dedo</b> a partir do que você escreveu aqui. Ele chega na sessão já tendo lido a sua história, então vocês não começam do zero: começam do ponto em que você parou de escrever.</p>
+  <p>E não é uma conversa de avaliação nem uma apresentação. É a sua primeira sessão de verdade. Muita gente sai dela dizendo a mesma coisa: que era a primeira vez que se sentia escutada de fato, sem pressa e sem julgamento.</p>
+  <div class="preco">R$ 600 <small>· sessão inicial</small></div>
+  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois dela, se fizer sentido continuar, o acompanhamento passa a ser mensal, e a gente te explica tudo com calma no WhatsApp. Você não fecha nada agora: o único compromisso é esse primeiro encontro.</p>
+  <div class="ops" data-chave="decisaoValor" data-avanca="1">
+    <button class="op" data-v="Sim, quero agendar"><span class="tecla">A</span>Sim, quero agendar minha sessão inicial</button>
+    <button class="op" data-v="O valor não cabe"><span class="tecla">B</span>O valor não cabe no meu momento</button>
+    <button class="op" data-v="Quero conversar antes"><span class="tecla">C</span>Quero conversar antes de decidir</button>
+  </div>
+  <div class="erro">Escolha o caminho que fizer sentido agora.</div>
+</section>
+
+<section class="tela alta texto" data-id="i-grupo" data-p="84">
+  <h2>Existe um caminho que talvez você não conheça.</h2>
+  <p>Antes de qualquer coisa: chegar até aqui e ser sincero sobre o valor não é falta de compromisso. É honestidade sobre o seu momento. <b>E o seu momento não precisa adiar o seu começo.</b></p>
+  <p>Existe o <b>Grupo Consciência</b>: uma turma fechada de 5 a 8 pessoas que se encontra toda semana com um analista, sob a mesma supervisão do Fernando e do Adriano. Fechada quer dizer que ninguém entra no meio do caminho. São sempre as mesmas pessoas, semana após semana, e é isso que faz o grupo virar um lugar seguro.</p>
+  <p>E vale dizer: o grupo não é a versão menor da análise. Escutar a dor do outro destrava coisas que a gente não alcança sozinho, e tem gente que escolhe o grupo podendo pagar o individual, justamente por essa força.</p>
+  <div class="preco">R$ 350 <small>por mês · encontro toda semana</small></div>
+  <p>Você não precisa decidir às cegas: toda turma nova começa com um primeiro encontro de conhecimento, que custa <b>R$ 97</b>. Você participa, sente como é, e só então decide se continua.</p>
+  <div class="ops" data-chave="decisaoGrupo" data-avanca="1">
+    <button class="op" data-v="Lista da próxima turma"><span class="tecla">A</span>Quero entrar na lista da próxima turma</button>
+    <button class="op" data-v="Individual mesmo"><span class="tecla">B</span>Prefiro seguir com o individual mesmo</button>
+    <button class="op" data-v="Conversar antes"><span class="tecla">C</span>Quero conversar antes de decidir</button>
+  </div>
+  <div class="erro">Escolha o caminho que fizer sentido.</div>
+</section>
+
+<section class="tela" data-id="i-conversa" data-p="88">
+  <div class="num">↳</div>
+  <h2>Vamos conversar antes, então.</h2>
+  <div class="ajuda">Assim a gente já começa a conversa sabendo do que você precisa.</div>
+  <div class="ops" data-chave="entender" data-avanca="1">
+    <button class="op" data-v="Como funciona o acompanhamento"><span class="tecla">A</span>Como funciona o acompanhamento</button>
+    <button class="op" data-v="O valor e as formas de pagamento"><span class="tecla">B</span>O valor e as formas de pagamento</button>
+    <button class="op" data-v="Qual formato faz mais sentido"><span class="tecla">C</span>Qual formato faz mais sentido para mim</button>
+    <button class="op" data-v="Se é o momento certo"><span class="tecla">D</span>Se este é o momento certo para começar</button>
+  </div>
+  <div class="erro">Escolha o que você gostaria de entender melhor.</div>
+</section>
+
+<section class="tela" data-id="i-conversa-txt" data-p="90">
+  <div class="num">↳</div>
+  <h2>Se quiser, escreve com suas palavras.</h2>
+  <div class="ajuda">Assim a gente já leva pensado. Se for sobre valor, conta o que precisa ser conversado: o valor em si, a forma de pagamento, ou a frequência. E se preferir pular, tudo bem.</div>
+  <textarea id="c-entender-txt" placeholder="Digite aqui, ou toque em OK para pular..."></textarea>
+  <div class="erro"></div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="i-quando" data-p="93">
+  <div class="num">→</div>
+  <h2>Quando você imagina começar?</h2>
+  <div class="ops" data-chave="quando" data-avanca="1">
+    <button class="op" data-v="Essa semana"><span class="tecla">A</span>Essa semana</button>
+    <button class="op" data-v="Nas próximas duas semanas"><span class="tecla">B</span>Nas próximas duas semanas</button>
+    <button class="op" data-v="No próximo mês"><span class="tecla">C</span>No próximo mês</button>
+    <button class="op" data-v="Ainda não sei"><span class="tecla">D</span>Ainda não sei</button>
+  </div>
+  <div class="erro">Vale a resposta que parecer mais verdadeira hoje.</div>
+</section>
+
+<section class="tela" data-id="i-horarios" data-p="97">
+  <div class="num">→</div>
+  <h2>Que dias e horários funcionam melhor para você?</h2>
+  <div class="ajuda">Marque quantas quiser.</div>
+  <div class="ops" data-chave="horarios" data-multi="1">
+    <button class="op" data-v="Manhãs"><span class="tecla">A</span>Manhãs</button>
+    <button class="op" data-v="Tardes"><span class="tecla">B</span>Tardes</button>
+    <button class="op" data-v="Noites"><span class="tecla">C</span>Noites</button>
+    <button class="op" data-v="Fins de semana"><span class="tecla">D</span>Fins de semana</button>
+    <button class="op" data-v="Tenho flexibilidade"><span class="tecla">E</span>Tenho flexibilidade</button>
+  </div>
+  <div class="erro">Marca pelo menos uma opção.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela texto" data-id="fim-ind" data-p="100">
+  <h2 id="t-fim-ind">Recebemos.</h2>
+  <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para começar.</p>
+  <p>Falar do que está doendo, mesmo por escrito, já é um começo. Você acabou de fazer isso.</p>
+  <p style="margin-bottom:22px">Agora é a última parte: toca no botão abaixo. A mensagem já vai pronta, é só apertar enviar. A gente responde o mais breve possível.</p>
+  <button class="btn btn-zap" onclick="abrirZap('ind')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
+    Chamar no WhatsApp
+  </button>
+</section>
+
+<!-- ============ TRILHA CASAL ============ -->
+
+<section class="tela" data-id="c-traz" data-p="24">
+  <div class="num">5 →</div>
+  <h2>O que está trazendo vocês dois até aqui?</h2>
+  <div class="ajuda">Escreva do seu jeito, na sua visão. A outra pessoa não precisa estar junto agora.</div>
+  <textarea id="c-ctraz" placeholder="Pode começar por qualquer ponto..."></textarea>
+  <div class="erro">Escreve um pouquinho? É a parte mais importante de todas.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="c-pesa" data-p="31">
+  <div class="num">6 →</div>
+  <h2>Onde isso tem pesado mais?</h2>
+  <div class="ajuda">Marque quantas quiser. Não existe resposta demais.</div>
+  <div class="ops" data-chave="pesa" data-multi="1">
+    <button class="op" data-v="Na comunicação"><span class="tecla">A</span>Na comunicação</button>
+    <button class="op" data-v="Na intimidade"><span class="tecla">B</span>Na intimidade</button>
+    <button class="op" data-v="Na rotina e na divisão da vida"><span class="tecla">C</span>Na rotina e na divisão da vida</button>
+    <button class="op" data-v="Na confiança"><span class="tecla">D</span>Na confiança</button>
+    <button class="op" data-v="Na relação com filhos ou família"><span class="tecla">E</span>Na relação com filhos ou família</button>
+    <button class="op" data-v="Na vontade de estar junto"><span class="tecla">F</span>Na vontade de estar junto</button>
+  </div>
+  <div class="erro">Marca pelo menos uma, do jeito que fizer mais sentido.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="c-tempo" data-p="38">
+  <div class="num">7 →</div>
+  <h2>Há quanto tempo isso vem acontecendo?</h2>
+  <div class="ops" data-chave="tempo" data-avanca="1">
+    <button class="op" data-v="Há poucas semanas"><span class="tecla">A</span>Há poucas semanas</button>
+    <button class="op" data-v="Há alguns meses"><span class="tecla">B</span>Há alguns meses</button>
+    <button class="op" data-v="Há mais de um ano"><span class="tecla">C</span>Há mais de um ano</button>
+    <button class="op" data-v="Há tanto tempo que eu nem lembro"><span class="tecla">D</span>Há tanto tempo que eu nem lembro</button>
+  </div>
+  <div class="erro">Escolha a opção que chegar mais perto.</div>
+</section>
+
+<section class="tela" data-id="c-escala" data-p="45">
+  <div class="num">8 →</div>
+  <h2>De 0 a 10, quanto isso pesa hoje?</h2>
+  <div class="ajuda">Não precisa ser exato. Vale o número que veio primeiro.</div>
+  <div class="escala" data-chave="escala"></div>
+  <div class="escala-rotulos"><span>quase não pesa</span><span>pesa muito</span></div>
+  <div class="erro">Toca no número que representar o peso de hoje.</div>
+</section>
+
+<section class="tela" data-id="c-inic" data-p="52">
+  <div class="num">9 →</div>
+  <h2>De quem foi a iniciativa de buscar ajuda?</h2>
+  <div class="ajuda">Não existe resposta errada. Isso só ajuda quem vai receber vocês.</div>
+  <div class="ops" data-chave="iniciativa" data-avanca="1">
+    <button class="op" data-v="Minha"><span class="tecla">A</span>Minha</button>
+    <button class="op" data-v="Da outra pessoa"><span class="tecla">B</span>Da outra pessoa</button>
+    <button class="op" data-v="Dos dois juntos"><span class="tecla">C</span>Dos dois juntos</button>
+  </div>
+  <div class="erro">Escolha uma das opções.</div>
+</section>
+
+<section class="tela" data-id="c-agora" data-p="59">
+  <div class="num">10 →</div>
+  <h2>O que fez vocês procurarem agora, e não há seis meses?</h2>
+  <div class="ajuda">Pode ser um evento específico, uma sensação que cresceu, uma conversa.</div>
+  <textarea id="c-cagora" placeholder="Digite aqui..."></textarea>
+  <div class="erro">Conta um pouquinho? Essa resposta ajuda muito.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="c-hist" data-p="64">
+  <div class="num">11 →</div>
+  <h2>Vocês já fizeram terapia de casal antes?</h2>
+  <div class="ops" data-chave="hist" data-avanca="1">
+    <button class="op" data-v="Nunca fizemos"><span class="tecla">A</span>Nunca fizemos</button>
+    <button class="op" data-v="Já fizemos e paramos"><span class="tecla">B</span>Já fizemos e paramos</button>
+    <button class="op" data-v="Fazemos atualmente"><span class="tecla">C</span>Fazemos atualmente</button>
+  </div>
+  <div class="erro">Escolha uma das opções.</div>
+</section>
+
+<section class="tela" data-id="c-espera" data-p="68">
+  <div class="num">12 →</div>
+  <h2>O que você espera que mude na relação?</h2>
+  <div class="ajuda">Não precisa ser uma meta grande. Pode ser algo pequeno que você gostaria de sentir diferente entre vocês.</div>
+  <textarea id="c-cespera" placeholder="Digite aqui..."></textarea>
+  <div class="erro">Escreve o que vier, mesmo que pareça pequeno.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela alta texto" data-id="c-virada" data-p="74">
+  <div class="duo">
+    <div class="pessoa">
+      <div class="aro"><img src="/fernando.jpg" alt="Fernando Segredo"></div>
+      <div class="nome">fernando segredo<b>.</b></div>
+      <div class="papel">Psicanalista · Supervisor</div>
+    </div>
+    <div class="pessoa">
+      <div class="aro"><img src="/adriano.jpg" alt="Adriano Maquiaveli"></div>
+      <div class="nome">adriano maquiaveli<b>.</b></div>
+      <div class="papel">Psicanalista · Supervisor</div>
+    </div>
+  </div>
+  <h2>Quem vai escutar vocês.</h2>
+  <p>Obrigado por escrever até aqui. Não é fácil colocar em palavras o que está doendo em uma relação, e você acabou de fazer isso.</p>
+  <p>O que você escreveu vai ser lido com atenção, <b>por gente, não por sistema</b>. O atendimento de vocês é conduzido por um <b>analista que trabalha com casais</b>, escolhido a partir do que você respondeu aqui.</p>
+  <p>A Academia do Consciente é uma ponte entre quem procura escuta e quem pode escutar. Os atendimentos são feitos por analistas com formação em psicanálise, todos em <b>supervisão clínica contínua</b> com Fernando Segredo e Adriano Maquiaveli, que também é professor em formação de psicanalistas.</p>
+  <p>Supervisão contínua quer dizer que o caso não fica trancado com uma pessoa só. Ele é acompanhado, discutido e revisto por quem tem mais tempo de clínica. É a diferença entre ser atendido por um profissional e <b>ser cuidado por uma estrutura</b>.</p>
+  <div class="virada-frase">Não existe conserto de relação em uma sessão. Existe começo. E o começo já muda alguma coisa entre duas pessoas.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">Continuar</button></div>
+</section>
+
+<section class="tela alta texto" data-id="c-valor" data-p="82">
+  <h2>A sessão inicial de vocês.</h2>
+  <p>Você acabou de contar o que está pesando entre vocês. O próximo passo é os dois serem escutados, juntos, por alguém de fora da relação.</p>
+  <p>A sessão inicial é uma hora com os dois presentes e um <b>analista que trabalha com casais</b>, escolhido a partir do que você escreveu aqui. Ele chega já tendo lido a sua versão da história, e a primeira coisa que faz é abrir espaço para a outra também.</p>
+  <p>E não é uma sessão para apontar quem está certo. É o primeiro lugar em que vocês dois falam da relação sem a conversa virar briga, porque tem alguém ali cuidando para que <b>cada um consiga terminar de falar</b>. Só isso já muda o tom do que vem depois.</p>
+  <div class="preco">R$ 750 <small>· sessão inicial de casal</small></div>
+  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois dela, se fizer sentido para os dois continuar, o acompanhamento passa a ser mensal, e a gente explica tudo com calma no WhatsApp. Vocês não fecham nada agora: o único compromisso é esse primeiro encontro.</p>
+  <div class="ops" data-chave="decisaoValor" data-avanca="1">
+    <button class="op" data-v="Sim, queremos agendar"><span class="tecla">A</span>Sim, queremos agendar</button>
+    <button class="op" data-v="Queremos conversar antes"><span class="tecla">B</span>Queremos conversar antes de decidir</button>
+  </div>
+  <div class="erro">Escolha o caminho que fizer sentido agora.</div>
+</section>
+
+<section class="tela" data-id="c-conversa" data-p="88">
+  <div class="num">↳</div>
+  <h2>Vamos conversar antes, então.</h2>
+  <div class="ajuda">Assim a gente já começa a conversa sabendo do que vocês precisam.</div>
+  <div class="ops" data-chave="entender" data-avanca="1">
+    <button class="op" data-v="Como funciona o acompanhamento de casal"><span class="tecla">A</span>Como funciona o acompanhamento de casal</button>
+    <button class="op" data-v="O valor e as formas de pagamento"><span class="tecla">B</span>O valor e as formas de pagamento</button>
+    <button class="op" data-v="Se é o momento certo"><span class="tecla">C</span>Se este é o momento certo para começar</button>
+  </div>
+  <div class="erro">Escolha o que vocês gostariam de entender melhor.</div>
+</section>
+
+<section class="tela" data-id="c-conversa-txt" data-p="90">
+  <div class="num">↳</div>
+  <h2>Se quiser, escreve com suas palavras.</h2>
+  <div class="ajuda">Assim a gente já leva pensado. E se preferir pular, tudo bem.</div>
+  <textarea id="c-centender-txt" placeholder="Digite aqui, ou toque em OK para pular..."></textarea>
+  <div class="erro"></div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="c-quando" data-p="94">
+  <div class="num">→</div>
+  <h2>Quando vocês imaginam começar?</h2>
+  <div class="ops" data-chave="quando" data-avanca="1">
+    <button class="op" data-v="Essa semana"><span class="tecla">A</span>Essa semana</button>
+    <button class="op" data-v="Nas próximas duas semanas"><span class="tecla">B</span>Nas próximas duas semanas</button>
+    <button class="op" data-v="No próximo mês"><span class="tecla">C</span>No próximo mês</button>
+    <button class="op" data-v="Ainda não sabemos"><span class="tecla">D</span>Ainda não sabemos</button>
+  </div>
+  <div class="erro">Vale a resposta que parecer mais verdadeira hoje.</div>
+</section>
+
+<section class="tela" data-id="c-horarios" data-p="97">
+  <div class="num">→</div>
+  <h2>Que dias e horários funcionam para os dois?</h2>
+  <div class="ajuda">Marque quantas quiser.</div>
+  <div class="ops" data-chave="horarios" data-multi="1">
+    <button class="op" data-v="Manhãs"><span class="tecla">A</span>Manhãs</button>
+    <button class="op" data-v="Tardes"><span class="tecla">B</span>Tardes</button>
+    <button class="op" data-v="Noites"><span class="tecla">C</span>Noites</button>
+    <button class="op" data-v="Fins de semana"><span class="tecla">D</span>Fins de semana</button>
+    <button class="op" data-v="Temos flexibilidade"><span class="tecla">E</span>Temos flexibilidade</button>
+  </div>
+  <div class="erro">Marca pelo menos uma opção.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela texto" data-id="fim-cas" data-p="100">
+  <h2 id="t-fim-cas">Recebemos.</h2>
+  <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para vocês começarem.</p>
+  <p>Falar do que está doendo numa relação, mesmo por escrito, já é um começo.</p>
+  <p style="margin-bottom:22px">Agora é a última parte: toca no botão abaixo. A mensagem já vai pronta, é só apertar enviar. A gente responde o mais breve possível.</p>
+  <button class="btn btn-zap" onclick="abrirZap('cas')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
+    Chamar no WhatsApp
+  </button>
+</section>
+
+<!-- ============ TRILHA OUTRA PESSOA ============ -->
+
+<section class="tela" data-id="o-quem" data-p="30">
+  <div class="num">5 →</div>
+  <h2>Quem é essa pessoa para você?</h2>
+  <div class="ajuda">Se preocupar com alguém a ponto de chegar até aqui já diz muito.</div>
+  <div class="ops" data-chave="oQuem" data-avanca="1">
+    <button class="op" data-v="Filho ou filha"><span class="tecla">A</span>Filho ou filha</button>
+    <button class="op" data-v="Parceiro ou parceira"><span class="tecla">B</span>Parceiro ou parceira</button>
+    <button class="op" data-v="Pai ou mãe"><span class="tecla">C</span>Pai ou mãe</button>
+    <button class="op" data-v="Amigo próximo"><span class="tecla">D</span>Amigo próximo</button>
+    <button class="op" data-v="Outro"><span class="tecla">E</span>Outro</button>
+  </div>
+  <div class="erro">Escolha uma das opções.</div>
+</section>
+
+<section class="tela" data-id="o-percebe" data-p="45">
+  <div class="num">6 →</div>
+  <h2>O que você tem percebido?</h2>
+  <div class="ajuda">Do seu jeito, com o que você tem visto e sentido.</div>
+  <textarea id="c-percebe" placeholder="Digite aqui..."></textarea>
+  <div class="erro">Conta um pouquinho do que você tem percebido.</div>
+  <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
+</section>
+
+<section class="tela" data-id="o-sabe" data-p="60">
+  <div class="num">7 →</div>
+  <h2>Ela sabe que você está buscando isso?</h2>
+  <div class="ops" data-chave="oSabe" data-avanca="1">
+    <button class="op" data-v="Sabe e topa"><span class="tecla">A</span>Sabe e topa</button>
+    <button class="op" data-v="Sabe, mas ainda resiste"><span class="tecla">B</span>Sabe, mas ainda resiste</button>
+    <button class="op" data-v="Ainda não sabe"><span class="tecla">C</span>Ainda não sabe</button>
+  </div>
+  <div class="erro">Escolha a que chegar mais perto da verdade.</div>
+</section>
+
+<section class="tela" data-id="o-idade" data-p="68">
+  <div class="num">8 →</div>
+  <h2>Qual a idade do seu filho ou filha?</h2>
+  <div class="ops" data-chave="idadeFilho" data-avanca="1">
+    <button class="op" data-v="Menos de 14 anos"><span class="tecla">A</span>Menos de 14 anos</button>
+    <button class="op" data-v="De 14 a 17 anos"><span class="tecla">B</span>De 14 a 17 anos</button>
+    <button class="op" data-v="18 anos ou mais"><span class="tecla">C</span>18 anos ou mais</button>
+  </div>
+  <div class="erro">Escolha a faixa de idade.</div>
+</section>
+
+<section class="tela texto" data-id="fim-crianca" data-p="100">
+  <h2>Ainda não atendemos crianças.</h2>
+  <p>Obrigado pela confiança de chegar até aqui por ela. Hoje a Academia ainda não tem atendimento para crianças com menos de 14 anos, e a gente prefere te dizer isso com clareza do que te encaminhar para algo que não é o certo.</p>
+  <p>Mas os seus dados ficam guardados com a gente. Assim que tivermos uma previsão de atendimento infantil, <b>você vai ser uma das primeiras pessoas a saber</b>.</p>
+  <p>Você não precisa fazer mais nada: nesse caso, quem entra em contato somos nós.</p>
+</section>
+
+<section class="tela texto" data-id="fim-outra" data-p="100">
+  <h2>Uma coisa importante.</h2>
+  <p>A análise só começa com o sim de quem vai ser atendido. Não dá para agendar uma sessão por outra pessoa adulta, e isso não é burocracia: <b>é o que protege o processo dela</b>.</p>
+  <p>O que a gente pode fazer agora é te ajudar. Te orientar sobre como ter essa conversa, o que costuma abrir portas e o que costuma fechar, e estar pronto para receber essa pessoa no momento em que ela disser sim.</p>
+  <p style="margin-bottom:22px">Toca no botão abaixo. A conversa é de orientação, e ela vale muito.</p>
+  <button class="btn btn-zap" onclick="abrirZap('outra')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
+    Chamar no WhatsApp
+  </button>
+</section>
+
+</main>
+
+<div class="marca-rodape">viva com mais consciência</div>
+<div class="nav">
+  <button id="nav-cima" onclick="voltar()" aria-label="Voltar" disabled>↑</button>
+  <button id="nav-baixo" onclick="avancar()" aria-label="Avançar">↓</button>
+</div>
+
+<script>
+/* ================= CONFIGURAÇÃO ================= */
+var CONFIG = {
+  URL_PLANILHA: 'https://script.google.com/macros/s/AKfycbzULTuOCGiEpDOTfRJfsw0PF4abvjihjo8rAcuxjif054k91r4IkVxmacCwYVvr58uL/exec',
+  TOKEN: 'academia-consciente-2026',
+  ZAP: '5511932872067',
+  MSG: {
+    ind:   'Olá, acabei de preencher o formulário e quero dar continuidade ao meu atendimento',
+    cas:   'Olá, acabei de preencher o formulário e quero dar continuidade ao nosso atendimento de casal',
+    outra: 'Olá, preenchi o formulário sobre uma pessoa querida e gostaria de orientação'
+  }
+};
+/* ================================================ */
+
+var atual = 'inicio';
+var historia = [];
+var enviouParcial = false;
+var enviouCompleta = false;
+var R = {
+  id:'', status:'', nome:'', quem:'', zap:'', email:'', trilha:'',
+  traz:'', pesa:[], tempo:'', escala:'', agora:'', espera:'',
+  hist:'', histTempo:'', histMotivo:'', iniciativa:'',
+  oQuem:'', oPercebe:'', oSabe:'', idadeFilho:'',
+  decisaoValor:'', decisaoGrupo:'', entender:'', entenderTxt:'',
+  quando:'', horarios:[]
+};
+R.id = (crypto.randomUUID ? crypto.randomUUID() : 'r' + Date.now() + Math.random().toString(16).slice(2));
+
+function tela(id){ return document.querySelector('[data-id="' + id + '"]'); }
+function primeiroNome(){
+  var p = (R.nome || '').trim().split(' ')[0];
+  return p ? p.charAt(0).toUpperCase() + p.slice(1) : '';
+}
+
+/* ---------- navegação: quem vem depois de quem ---------- */
+function proximo(id){
+  switch(id){
+    case 'inicio': return 'nome';
+    case 'nome': return 'quem';
+    case 'quem': return 'zap';
+    case 'zap': return 'email';
+    case 'email':
+      salvar('Parcial');
+      if (R.quem === 'Para mim'){ R.trilha = 'Individual'; return 'i-traz'; }
+      if (R.quem.indexOf('casal') > -1){ R.trilha = 'Casal'; return 'c-traz'; }
+      R.trilha = 'Outra pessoa'; return 'o-quem';
+
+    /* individual */
+    case 'i-traz': return 'i-pesa';
+    case 'i-pesa': return 'i-tempo';
+    case 'i-tempo': return 'i-escala';
+    case 'i-escala': return 'i-agora';
+    case 'i-agora': return 'i-espera';
+    case 'i-espera': return 'i-hist';
+    case 'i-hist':
+      if (R.hist === 'Já fiz e parei') return 'i-parei-tempo';
+      if (R.hist === 'Faço atualmente') return 'i-atual-tempo';
+      return 'i-virada';
+    case 'i-parei-tempo': return 'i-parei-motivo';
+    case 'i-parei-motivo': return 'i-virada';
+    case 'i-atual-tempo': return 'i-atual-motivo';
+    case 'i-atual-motivo': return 'i-virada';
+    case 'i-virada': return 'i-valor';
+    case 'i-valor':
+      if (R.decisaoValor === 'Sim, quero agendar') return 'i-quando';
+      if (R.decisaoValor === 'O valor não cabe') return 'i-grupo';
+      return 'i-conversa';
+    case 'i-grupo':
+      if (R.decisaoGrupo === 'Conversar antes') return 'i-conversa';
+      return 'i-quando';
+    case 'i-conversa': return 'i-conversa-txt';
+    case 'i-conversa-txt': return 'i-quando';
+    case 'i-quando': return 'i-horarios';
+    case 'i-horarios': return 'fim-ind';
+
+    /* casal */
+    case 'c-traz': return 'c-pesa';
+    case 'c-pesa': return 'c-tempo';
+    case 'c-tempo': return 'c-escala';
+    case 'c-escala': return 'c-inic';
+    case 'c-inic': return 'c-agora';
+    case 'c-agora': return 'c-hist';
+    case 'c-hist': return 'c-espera';
+    case 'c-espera': return 'c-virada';
+    case 'c-virada': return 'c-valor';
+    case 'c-valor':
+      if (R.decisaoValor === 'Sim, queremos agendar') return 'c-quando';
+      return 'c-conversa';
+    case 'c-conversa': return 'c-conversa-txt';
+    case 'c-conversa-txt': return 'c-quando';
+    case 'c-quando': return 'c-horarios';
+    case 'c-horarios': return 'fim-cas';
+
+    /* outra pessoa */
+    case 'o-quem': return 'o-percebe';
+    case 'o-percebe': return 'o-sabe';
+    case 'o-sabe':
+      if (R.oQuem === 'Filho ou filha') return 'o-idade';
+      return 'fim-outra';
+    case 'o-idade':
+      if (R.idadeFilho === 'Menos de 14 anos') return 'fim-crianca';
+      R.trilha = 'Outra pessoa (filho ' + R.idadeFilho + ')';
+      return 'i-virada';
+  }
+  return null;
+}
+
+/* ---------- validação por tela ---------- */
+function valida(id){
+  function v(campo){ return document.getElementById(campo).value.trim(); }
+  switch(id){
+    case 'nome': R.nome = v('c-nome'); return R.nome.length >= 2;
+    case 'quem': return R.quem !== '';
+    case 'zap': R.zap = v('c-zap').replace(/\D/g,''); return R.zap.length >= 10 && R.zap.length <= 13;
+    case 'email': R.email = v('c-email'); return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(R.email);
+    case 'i-traz': R.traz = v('c-traz'); return R.traz.length >= 3;
+    case 'i-pesa': return R.pesa.length >= 1;
+    case 'i-tempo': return R.tempo !== '';
+    case 'i-escala': return R.escala !== '';
+    case 'i-agora': R.agora = v('c-agora'); return R.agora.length >= 3;
+    case 'i-espera': R.espera = v('c-espera'); return R.espera.length >= 3;
+    case 'i-hist': return R.hist !== '';
+    case 'i-parei-tempo': case 'i-atual-tempo': return R.histTempo !== '';
+    case 'i-parei-motivo': R.histMotivo = v('c-parei-motivo'); return true;
+    case 'i-atual-motivo': R.histMotivo = v('c-atual-motivo'); return true;
+    case 'i-valor': return R.decisaoValor !== '';
+    case 'i-grupo': return R.decisaoGrupo !== '';
+    case 'i-conversa': return R.entender !== '';
+    case 'i-conversa-txt': R.entenderTxt = v('c-entender-txt'); return true;
+    case 'i-quando': return R.quando !== '';
+    case 'i-horarios': return R.horarios.length >= 1;
+    case 'c-traz': R.traz = v('c-ctraz'); return R.traz.length >= 3;
+    case 'c-pesa': return R.pesa.length >= 1;
+    case 'c-tempo': return R.tempo !== '';
+    case 'c-escala': return R.escala !== '';
+    case 'c-inic': return R.iniciativa !== '';
+    case 'c-agora': R.agora = v('c-cagora'); return R.agora.length >= 3;
+    case 'c-hist': return R.hist !== '';
+    case 'c-espera': R.espera = v('c-cespera'); return R.espera.length >= 3;
+    case 'c-valor': return R.decisaoValor !== '';
+    case 'c-conversa': return R.entender !== '';
+    case 'c-conversa-txt': R.entenderTxt = v('c-centender-txt'); return true;
+    case 'c-quando': return R.quando !== '';
+    case 'c-horarios': return R.horarios.length >= 1;
+    case 'o-quem': return R.oQuem !== '';
+    case 'o-percebe': R.oPercebe = v('c-percebe'); return R.oPercebe.length >= 3;
+    case 'o-sabe': return R.oSabe !== '';
+    case 'o-idade': return R.idadeFilho !== '';
+  }
+  return true;
+}
+
+/* ---------- mostrar tela ---------- */
+function mostra(id){
+  document.querySelectorAll('.tela').forEach(function(t){ t.classList.remove('ativa'); });
+  var t = tela(id);
+  t.classList.add('ativa');
+  t.scrollTop = 0;
+  atual = id;
+
+  var pct = parseInt(t.dataset.p || '0');
+  document.getElementById('barra').style.width = pct + '%';
+  document.getElementById('pct').textContent = (id === 'inicio') ? '' : pct + '% preenchido';
+  document.getElementById('nav-cima').disabled = (historia.length === 0);
+  document.getElementById('nav-baixo').disabled = (id.indexOf('fim-') === 0);
+
+  if (id === 'i-traz' && primeiroNome())
+    document.getElementById('t-traz').textContent = primeiroNome() + ', o que está te trazendo aqui?';
+  if (id === 'i-valor' && primeiroNome() && R.trilha.indexOf('filho') > -1)
+    document.getElementById('t-valor').textContent = 'A sessão inicial é o próximo passo para quem você quer ajudar.';
+  if (id === 'fim-ind' && primeiroNome())
+    document.getElementById('t-fim-ind').textContent = 'Recebemos, ' + primeiroNome() + '.';
+  if (id === 'fim-cas' && primeiroNome())
+    document.getElementById('t-fim-cas').textContent = 'Recebemos, ' + primeiroNome() + '.';
+
+  if (id.indexOf('fim-') === 0 && !enviouCompleta){
+    enviouCompleta = true;
+    salvar('Completa');
+  }
+
+  var campo = t.querySelector('input, textarea');
+  if (campo) setTimeout(function(){ campo.focus(); }, 380);
+}
+
+function avancar(){
+  if (atual.indexOf('fim-') === 0) return;
+  var t = tela(atual);
+  var e = t.querySelector('.erro');
+  if (!valida(atual)){ if (e) e.classList.add('mostra'); return; }
+  if (e) e.classList.remove('mostra');
+  var prox = proximo(atual);
+  if (!prox) return;
+  historia.push(atual);
+  mostra(prox);
+}
+
+function voltar(){
+  if (historia.length === 0) return;
+  mostra(historia.pop());
+}
+
+/* ---------- envio para a planilha ---------- */
+function salvar(status){
+  if (CONFIG.URL_PLANILHA.indexOf('COLE_AQUI') === 0) return;
+  R.status = status;
+  var corpo = JSON.stringify({
+    token: CONFIG.TOKEN,
+    dados: {
+      id: R.id, status: status, trilha: R.trilha,
+      nome: R.nome, quem: R.quem, zap: R.zap, email: R.email,
+      traz: R.traz, pesa: R.pesa.join('; '), tempo: R.tempo, escala: R.escala,
+      agora: R.agora, espera: R.espera,
+      hist: R.hist, histTempo: R.histTempo, histMotivo: R.histMotivo,
+      iniciativa: R.iniciativa,
+      oQuem: R.oQuem, oPercebe: R.oPercebe, oSabe: R.oSabe, idadeFilho: R.idadeFilho,
+      decisaoValor: R.decisaoValor, decisaoGrupo: R.decisaoGrupo,
+      entender: R.entender, entenderTxt: R.entenderTxt,
+      quando: R.quando, horarios: R.horarios.join('; '),
+      ultimaTela: atual
+    }
+  });
+  try{
+    fetch(CONFIG.URL_PLANILHA, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: corpo
+    });
+  }catch(e){}
+}
+
+function abrirZap(qual){
+  salvar('Completa');
+  window.open('https://wa.me/' + CONFIG.ZAP + '?text=' + encodeURIComponent(CONFIG.MSG[qual]), '_blank');
+}
+
+/* ---------- escalas 0 a 10 ---------- */
+document.querySelectorAll('.escala').forEach(function(esc){
+  for (var i = 0; i <= 10; i++){
+    (function(n){
+      var b = document.createElement('button');
+      b.textContent = n;
+      b.onclick = function(){
+        esc.querySelectorAll('button').forEach(function(x){ x.classList.remove('marcada'); });
+        b.classList.add('marcada');
+        R.escala = String(n);
+        var e = tela(atual).querySelector('.erro');
+        if (e) e.classList.remove('mostra');
+        setTimeout(avancar, 320);
+      };
+      esc.appendChild(b);
+    })(i);
+  }
+});
+
+/* ---------- grupos de opções ---------- */
+document.querySelectorAll('.ops').forEach(function(grupo){
+  var multi = grupo.dataset.multi === '1';
+  var auto = grupo.dataset.avanca === '1';
+  var chave = grupo.dataset.chave;
+  grupo.querySelectorAll('.op').forEach(function(o){
+    o.addEventListener('click', function(){
+      if (multi){
+        o.classList.toggle('marcada');
+        R[chave] = Array.prototype.map.call(
+          grupo.querySelectorAll('.op.marcada'),
+          function(x){ return x.dataset.v; }
+        );
+      } else {
+        grupo.querySelectorAll('.op').forEach(function(x){ x.classList.remove('marcada'); });
+        o.classList.add('marcada');
+        R[chave] = o.dataset.v;
+      }
+      var e = tela(atual).querySelector('.erro');
+      if (e) e.classList.remove('mostra');
+      if (auto) setTimeout(avancar, 320);
+    });
+  });
+});
+
+/* ---------- teclado ---------- */
+document.addEventListener('keydown', function(ev){
+  var alvo = document.activeElement;
+  if (ev.key === 'Enter'){
+    if (alvo && alvo.tagName === 'TEXTAREA' && !ev.ctrlKey && !ev.metaKey) return;
+    ev.preventDefault(); avancar(); return;
+  }
+  var grupo = tela(atual) ? tela(atual).querySelector('.ops') : null;
+  if (grupo && !(alvo && (alvo.tagName === 'INPUT' || alvo.tagName === 'TEXTAREA'))){
+    var idx = ev.key.toLowerCase().charCodeAt(0) - 97;
+    var ops = grupo.querySelectorAll('.op');
+    if (idx >= 0 && idx < ops.length) ops[idx].click();
+  }
+});
+
+/* ---------- máscara do WhatsApp ---------- */
+document.getElementById('c-zap').addEventListener('input', function(){
+  var d = this.value.replace(/\D/g,'').slice(0,11);
+  if (d.length > 6) this.value = '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+  else if (d.length > 2) this.value = '(' + d.slice(0,2) + ') ' + d.slice(2);
+  else this.value = d;
+});
+
+mostra('inicio');
+</script>
+</body>
+</html>
