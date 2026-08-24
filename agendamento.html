@@ -445,6 +445,18 @@
   <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
 </section>
 
+<section class="tela" data-id="i-analista" data-p="99">
+  <div class="num">→</div>
+  <h2>Você prefere ser atendido por um analista homem ou mulher?</h2>
+  <div class="ajuda">Algumas pessoas se abrem melhor com um ou com outro, e está tudo bem. A gente leva isso em conta na hora de escolher quem vai te receber.</div>
+  <div class="ops" data-chave="prefAnalista" data-avanca="1">
+    <button class="op" data-v="Homem"><span class="tecla">A</span>Prefiro homem</button>
+    <button class="op" data-v="Mulher"><span class="tecla">B</span>Prefiro mulher</button>
+    <button class="op" data-v="Tanto faz"><span class="tecla">C</span>Para mim, tanto faz</button>
+  </div>
+  <div class="erro">Escolha uma das opções, sem peso nenhum.</div>
+</section>
+
 <section class="tela texto" data-id="fim-ind" data-p="100">
   <h2 id="t-fim-ind">Recebemos.</h2>
   <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para começar.</p>
@@ -629,6 +641,18 @@
   <div class="acao"><button class="btn" onclick="avancar()">OK ✓</button></div>
 </section>
 
+<section class="tela" data-id="c-analista" data-p="99">
+  <div class="num">→</div>
+  <h2>Vocês preferem que o analista seja homem ou mulher?</h2>
+  <div class="ajuda">Não existe resposta certa. A gente leva isso em conta na hora de escolher quem vai receber vocês.</div>
+  <div class="ops" data-chave="prefAnalista" data-avanca="1">
+    <button class="op" data-v="Homem"><span class="tecla">A</span>Preferimos homem</button>
+    <button class="op" data-v="Mulher"><span class="tecla">B</span>Preferimos mulher</button>
+    <button class="op" data-v="Tanto faz"><span class="tecla">C</span>Para nós, tanto faz</button>
+  </div>
+  <div class="erro">Escolha uma das opções, sem peso nenhum.</div>
+</section>
+
 <section class="tela texto" data-id="fim-cas" data-p="100">
   <h2 id="t-fim-cas">Recebemos.</h2>
   <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para vocês começarem.</p>
@@ -737,7 +761,7 @@ var R = {
   hist:'', histTempo:'', histMotivo:'', iniciativa:'',
   oQuem:'', oPercebe:'', oSabe:'', idadeFilho:'',
   decisaoValor:'', decisaoGrupo:'', entender:'', entenderTxt:'',
-  quando:'', horarios:[]
+  quando:'', horarios:[], prefAnalista:''
 };
 R.id = (crypto.randomUUID ? crypto.randomUUID() : 'r' + Date.now() + Math.random().toString(16).slice(2));
 
@@ -786,7 +810,10 @@ function proximo(id){
     case 'i-conversa': return 'i-conversa-txt';
     case 'i-conversa-txt': return 'i-quando';
     case 'i-quando': return 'i-horarios';
-    case 'i-horarios': return 'fim-ind';
+    case 'i-horarios':
+      if (R.decisaoValor === 'Sim, quero agendar') return 'i-analista';
+      return 'fim-ind';
+    case 'i-analista': return 'fim-ind';
 
     /* casal */
     case 'c-traz': return 'c-pesa';
@@ -804,7 +831,10 @@ function proximo(id){
     case 'c-conversa': return 'c-conversa-txt';
     case 'c-conversa-txt': return 'c-quando';
     case 'c-quando': return 'c-horarios';
-    case 'c-horarios': return 'fim-cas';
+    case 'c-horarios':
+      if (R.decisaoValor === 'Sim, queremos agendar') return 'c-analista';
+      return 'fim-cas';
+    case 'c-analista': return 'fim-cas';
 
     /* outra pessoa */
     case 'o-quem': return 'o-percebe';
@@ -844,6 +874,7 @@ function valida(id){
     case 'i-conversa-txt': R.entenderTxt = v('c-entender-txt'); return true;
     case 'i-quando': return R.quando !== '';
     case 'i-horarios': return R.horarios.length >= 1;
+    case 'i-analista': case 'c-analista': return R.prefAnalista !== '';
     case 'c-traz': R.traz = v('c-ctraz'); return R.traz.length >= 3;
     case 'c-pesa': return R.pesa.length >= 1;
     case 'c-tempo': return R.tempo !== '';
@@ -930,7 +961,7 @@ function salvar(status){
       oQuem: R.oQuem, oPercebe: R.oPercebe, oSabe: R.oSabe, idadeFilho: R.idadeFilho,
       decisaoValor: R.decisaoValor, decisaoGrupo: R.decisaoGrupo,
       entender: R.entender, entenderTxt: R.entenderTxt,
-      quando: R.quando, horarios: R.horarios.join('; '),
+      quando: R.quando, horarios: R.horarios.join('; '), prefAnalista: R.prefAnalista,
       ultimaTela: atual
     }
   });
