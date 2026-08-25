@@ -8,7 +8,7 @@
 <title>Agendamento · Academia do Consciente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme: light dark;
@@ -54,10 +54,10 @@
   .tela.alta{justify-content:flex-start; padding-top:26px}
 
   .num{font-size:.78rem; font-weight:600; color:var(--lilas-esc); margin-bottom:10px}
-  h1{font-family:'Playfair Display',serif; font-style:italic; font-weight:900;
-     font-size:1.6rem; line-height:1.24; margin-bottom:14px}
-  h2{font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
-     font-size:1.42rem; line-height:1.25; margin-bottom:6px}
+  h1{font-family:'Inter',sans-serif; font-weight:900; letter-spacing:-.01em;
+     font-size:1.5rem; line-height:1.25; margin-bottom:14px}
+  h2{font-family:'Inter',sans-serif; font-weight:900; letter-spacing:-.01em;
+     font-size:1.3rem; line-height:1.3; margin-bottom:6px}
   .ajuda{color:var(--texto2); font-size:.92rem; margin-bottom:20px}
   .texto p{font-size:.93rem; margin-bottom:12px}
   .texto .mini{color:var(--texto2); font-size:.8rem}
@@ -181,10 +181,9 @@
 
 <section class="tela ativa texto" data-id="inicio" data-p="0">
   <h1>Você não precisa saber o que está sentindo para começar.</h1>
-  <p>Se você chegou até aqui, alguma coisa te trouxe. Pode ser um incômodo que você já sabe nomear, pode ser só um cansaço que não passa, ou aquela sensação de que algo não está no lugar e você não consegue explicar direito. Está tudo bem chegar sem saber.</p>
-  <p>Este formulário existe por um motivo simples: a gente não quer que você conte a sua história pela primeira vez para um desconhecido. Quando você marcar a sua sessão, a pessoa que vai te escutar já vai ter lido o que você escreveu aqui.</p>
-  <p>O atendimento é feito por analistas com formação em psicanálise, que trabalham sob supervisão clínica contínua de Fernando Segredo e Adriano Maquiaveli. Ou seja, você não vai ser atendido por alguém sozinho, decidindo por conta própria. Existe um time acompanhando o trabalho por trás.</p>
-  <p class="mini">São cerca de três minutos. Não é um teste, não existe resposta certa e ninguém vai te julgar por nada do que escrever.</p>
+  <p>Se você chegou até aqui, alguma coisa te trouxe. Pode ser um incômodo que já tem nome, ou só a sensação de que algo não está no lugar. Está tudo bem chegar sem saber.</p>
+  <p>Aqui você não conta a sua história pela primeira vez para um desconhecido: quem for te escutar já vai ter lido o que você escrever. O atendimento é feito por analistas sob supervisão clínica contínua de Fernando Segredo e Adriano Maquiaveli.</p>
+  <p class="mini">São três minutos. Não é um teste, e ninguém vai te julgar por nada.</p>
   <div class="acao"><button class="btn grande" onclick="avancar()">Começar</button><span class="enter-dica">ou pressione Enter ↵</span></div>
 </section>
 
@@ -357,22 +356,20 @@
     </div>
   </div>
   <h2 id="t-virada">Quem vai te escutar.</h2>
-  <p>Obrigado por escrever até aqui. Não é fácil colocar em palavras o que está doendo, e você acabou de fazer isso.</p>
-  <p>O que você escreveu vai ser lido com atenção, <b>por gente, não por sistema</b>. É a partir daí que a gente entende o que está acontecendo e escolhe quem é o analista certo para conduzir a primeira sessão. Não é sorteio e não é fila. É leitura.</p>
-  <p>A Academia do Consciente é uma ponte entre quem procura escuta e quem pode escutar. Os atendimentos são feitos por analistas com formação em psicanálise, todos em <b>supervisão clínica contínua</b> com Fernando Segredo e Adriano Maquiaveli, que também é professor em formação de psicanalistas.</p>
-  <p>Supervisão contínua quer dizer que o caso não fica trancado com uma pessoa só. Ele é acompanhado, discutido e revisto por quem tem mais tempo de clínica. Se o analista trava, ele tem para quem levar. Se o caminho precisa mudar, alguém percebe. É a diferença entre ser atendido por um profissional e <b>ser cuidado por uma estrutura</b>.</p>
-  <p>Vale dizer uma coisa que quase ninguém diz: sofrimento que se arrasta não costuma passar sozinho. Ele se acomoda. A pessoa se acostuma a viver com um peso a mais e chama isso de normal. O que muda o jogo não é uma conversa isolada, é o acompanhamento, o encontro que se repete e vai desmontando aquilo aos poucos.</p>
-  <div class="virada-frase">Não existe cura em uma sessão, e a gente não vai te prometer isso. Existe começo. E o começo já muda alguma coisa.</div>
+  <p>Obrigado por escrever até aqui. Isso que você acabou de fazer já é raro: a maioria das pessoas engole.</p>
+  <p>Tudo vai ser lido <b>por gente, não por sistema</b>. É a leitura do que você escreveu que define o analista certo para você.</p>
+  <p>Todos os analistas trabalham em <b>supervisão clínica contínua</b> com Fernando e Adriano. Na prática: o seu caso nunca fica nas mãos de uma pessoa só. É a diferença entre ser atendido e <b>ser cuidado por uma estrutura</b>.</p>
+  <p>E uma verdade que quase ninguém diz: sofrimento que se arrasta não passa sozinho. Ele se acomoda, e a gente aprende a chamar de normal.</p>
+  <div class="virada-frase">Não existe cura em uma sessão. Existe começo. E o começo já muda alguma coisa.</div>
   <div class="acao"><button class="btn" onclick="avancar()">Continuar</button></div>
 </section>
 
 <section class="tela alta texto" data-id="i-valor" data-p="80">
   <h2>A sessão inicial.</h2>
-  <p id="t-valor">Você acabou de contar o que está pesando. O próximo passo é ser escutado de verdade.</p>
-  <p>A sessão inicial é uma hora inteira, só sua, com um analista <b>escolhido a dedo</b> a partir do que você escreveu aqui. Ele chega na sessão já tendo lido a sua história, então vocês não começam do zero: começam do ponto em que você parou de escrever.</p>
-  <p>E não é uma conversa de avaliação nem uma apresentação. É a sua primeira sessão de verdade. Muita gente sai dela dizendo a mesma coisa: que era a primeira vez que se sentia escutada de fato, sem pressa e sem julgamento.</p>
+  <p id="t-valor">Você acabou de nomear o que está pesando. O próximo passo é ser escutado de verdade.</p>
+  <p>Uma hora inteira, só sua, com um analista <b>escolhido a dedo</b> pelo que você escreveu. Ele chega já sabendo a sua história: vocês começam do ponto em que você parou. E esse primeiro encontro já é a sua primeira sessão de verdade.</p>
   <div class="preco">R$ 600 <small>· sessão inicial</small></div>
-  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois dela, se fizer sentido continuar, o acompanhamento passa a ser mensal, e a gente te explica tudo com calma no WhatsApp. Você não fecha nada agora: o único compromisso é esse primeiro encontro.</p>
+  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois, o acompanhamento passa a ser mensal, explicado com calma no WhatsApp. Nada é fechado agora: o compromisso é um encontro só.</p>
   <div class="ops" data-chave="decisaoValor" data-avanca="1">
     <button class="op" data-v="Sim, quero agendar"><span class="tecla">A</span>Sim, quero agendar minha sessão inicial</button>
     <button class="op" data-v="O valor não cabe"><span class="tecla">B</span>O valor não cabe no meu momento</button>
@@ -383,11 +380,11 @@
 
 <section class="tela alta texto" data-id="i-grupo" data-p="84">
   <h2>Existe um caminho que talvez você não conheça.</h2>
-  <p>Antes de qualquer coisa: chegar até aqui e ser sincero sobre o valor não é falta de compromisso. É honestidade sobre o seu momento. <b>E o seu momento não precisa adiar o seu começo.</b></p>
-  <p>Existe o <b>Grupo Consciência</b>: uma turma fechada de 5 a 8 pessoas que se encontra toda semana com um analista, sob a mesma supervisão do Fernando e do Adriano. Fechada quer dizer que ninguém entra no meio do caminho. São sempre as mesmas pessoas, semana após semana, e é isso que faz o grupo virar um lugar seguro.</p>
-  <p>E vale dizer: o grupo não é a versão menor da análise. Escutar a dor do outro destrava coisas que a gente não alcança sozinho, e tem gente que escolhe o grupo podendo pagar o individual, justamente por essa força.</p>
+  <p>Ser sincero sobre o valor mostra honestidade com o seu momento. <b>E o seu momento financeiro não precisa adiar o seu começo.</b></p>
+  <p>O <b>Grupo Consciência</b> é uma turma fechada de 5 a 8 pessoas, com encontro toda semana e a mesma supervisão. Ninguém entra no meio do caminho, e é isso que faz dele um lugar seguro.</p>
+  <p>O grupo tem uma força própria: escutar a dor do outro destrava o que a gente não alcança sozinho. Tem gente que escolhe o grupo podendo pagar o individual.</p>
   <div class="preco">R$ 400 <small>por mês · encontro toda semana</small></div>
-  <p>Você não precisa decidir às cegas: toda turma nova começa com um primeiro encontro de conhecimento, que custa <b>R$ 97</b>. Você participa, sente como é, e só então decide se continua.</p>
+  <p>Toda turma nova começa com um encontro de conhecimento por <b>R$ 97</b>. Você sente como é, e só então decide.</p>
   <div class="ops" data-chave="decisaoGrupo" data-avanca="1">
     <button class="op" data-v="Lista da próxima turma"><span class="tecla">A</span>Quero entrar na lista da próxima turma</button>
     <button class="op" data-v="Individual mesmo"><span class="tecla">B</span>Prefiro seguir com o individual mesmo</button>
@@ -459,9 +456,8 @@
 
 <section class="tela texto" data-id="fim-ind" data-p="100">
   <h2 id="t-fim-ind">Recebemos.</h2>
-  <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para começar.</p>
-  <p>Falar do que está doendo, mesmo por escrito, já é um começo. Você acabou de fazer isso.</p>
-  <p style="margin-bottom:22px">Agora é a última parte: toca no botão abaixo. A mensagem já vai pronta, é só apertar enviar. A gente responde o mais breve possível.</p>
+  <p>Tudo vai ser lido por uma pessoa, com atenção. Falar do que dói já é um começo, e você acabou de dar o primeiro passo.</p>
+  <p style="margin-bottom:22px">Agora toca no botão: a mensagem já vai pronta. A gente responde o mais breve possível.</p>
   <button class="btn btn-zap" onclick="abrirZap('ind')">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
     Chamar no WhatsApp
@@ -571,21 +567,18 @@
     </div>
   </div>
   <h2>Quem vai escutar vocês.</h2>
-  <p>Obrigado por escrever até aqui. Não é fácil colocar em palavras o que está doendo em uma relação, e você acabou de fazer isso.</p>
-  <p>O que você escreveu vai ser lido com atenção, <b>por gente, não por sistema</b>. O atendimento de vocês é conduzido por um <b>analista que trabalha com casais</b>, escolhido a partir do que você respondeu aqui.</p>
-  <p>A Academia do Consciente é uma ponte entre quem procura escuta e quem pode escutar. Os atendimentos são feitos por analistas com formação em psicanálise, todos em <b>supervisão clínica contínua</b> com Fernando Segredo e Adriano Maquiaveli, que também é professor em formação de psicanalistas.</p>
-  <p>Supervisão contínua quer dizer que o caso não fica trancado com uma pessoa só. Ele é acompanhado, discutido e revisto por quem tem mais tempo de clínica. É a diferença entre ser atendido por um profissional e <b>ser cuidado por uma estrutura</b>.</p>
+  <p>Obrigado por escrever até aqui. Colocar em palavras o que dói numa relação já é um movimento.</p>
+  <p>Tudo vai ser lido <b>por gente, não por sistema</b>, e o atendimento é conduzido por um <b>analista que trabalha com casais</b>, em supervisão contínua com Fernando e Adriano. O caso de vocês nunca fica nas mãos de uma pessoa só.</p>
   <div class="virada-frase">Não existe conserto de relação em uma sessão. Existe começo. E o começo já muda alguma coisa entre duas pessoas.</div>
   <div class="acao"><button class="btn" onclick="avancar()">Continuar</button></div>
 </section>
 
 <section class="tela alta texto" data-id="c-valor" data-p="82">
   <h2>A sessão inicial de vocês.</h2>
-  <p>Você acabou de contar o que está pesando entre vocês. O próximo passo é os dois serem escutados, juntos, por alguém de fora da relação.</p>
-  <p>A sessão inicial é uma hora com os dois presentes e um <b>analista que trabalha com casais</b>, escolhido a partir do que você escreveu aqui. Ele chega já tendo lido a sua versão da história, e a primeira coisa que faz é abrir espaço para a outra também.</p>
-  <p>E não é uma sessão para apontar quem está certo. É o primeiro lugar em que vocês dois falam da relação sem a conversa virar briga, porque tem alguém ali cuidando para que <b>cada um consiga terminar de falar</b>. Só isso já muda o tom do que vem depois.</p>
+  <p><b>Uma hora e meia</b> com os dois presentes e um <b>analista que trabalha com casais</b>. Ele chega já tendo lido a sua versão da história, e abre espaço para a outra também.</p>
+  <p>É o primeiro lugar onde vocês dois falam da relação sem a conversa virar briga, porque tem alguém cuidando para que <b>cada um consiga terminar de falar</b>. Ninguém ali aponta quem está certo.</p>
   <div class="preco">R$ 750 <small>· sessão inicial de casal</small></div>
-  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois dela, se fizer sentido para os dois continuar, o acompanhamento passa a ser mensal, e a gente explica tudo com calma no WhatsApp. Vocês não fecham nada agora: o único compromisso é esse primeiro encontro.</p>
+  <p class="mini" style="color:var(--texto2); font-size:.8rem; margin-bottom:14px">Depois, o acompanhamento passa a ser mensal, explicado no WhatsApp. Nada é fechado agora.</p>
   <div class="ops" data-chave="decisaoValor" data-avanca="1">
     <button class="op" data-v="Sim, queremos agendar"><span class="tecla">A</span>Sim, queremos agendar</button>
     <button class="op" data-v="Queremos conversar antes"><span class="tecla">B</span>Queremos conversar antes de decidir</button>
@@ -655,9 +648,8 @@
 
 <section class="tela texto" data-id="fim-cas" data-p="100">
   <h2 id="t-fim-cas">Recebemos.</h2>
-  <p>O que você escreveu vai ser lido com atenção, por uma pessoa, não por sistema. É a partir daí que a gente entende o melhor caminho para vocês começarem.</p>
-  <p>Falar do que está doendo numa relação, mesmo por escrito, já é um começo.</p>
-  <p style="margin-bottom:22px">Agora é a última parte: toca no botão abaixo. A mensagem já vai pronta, é só apertar enviar. A gente responde o mais breve possível.</p>
+  <p>Tudo vai ser lido por uma pessoa, com atenção. Falar do que dói numa relação já é um começo, e vocês acabaram de dar o primeiro passo.</p>
+  <p style="margin-bottom:22px">Agora toca no botão: a mensagem já vai pronta. A gente responde o mais breve possível.</p>
   <button class="btn btn-zap" onclick="abrirZap('cas')">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
     Chamar no WhatsApp
@@ -713,16 +705,15 @@
 
 <section class="tela texto" data-id="fim-crianca" data-p="100">
   <h2>Ainda não atendemos crianças.</h2>
-  <p>Obrigado pela confiança de chegar até aqui por ela. Hoje a Academia ainda não tem atendimento para crianças com menos de 14 anos, e a gente prefere te dizer isso com clareza do que te encaminhar para algo que não é o certo.</p>
-  <p>Mas os seus dados ficam guardados com a gente. Assim que tivermos uma previsão de atendimento infantil, <b>você vai ser uma das primeiras pessoas a saber</b>.</p>
-  <p>Você não precisa fazer mais nada: nesse caso, quem entra em contato somos nós.</p>
+  <p>Obrigado pela confiança de chegar até aqui por ela. Hoje ainda não atendemos menores de 14 anos, e preferimos a clareza a te encaminhar para o que não é o certo.</p>
+  <p>Seus dados ficam guardados: quando o atendimento infantil abrir, <b>você vai ser uma das primeiras pessoas a saber</b>. Não precisa fazer mais nada, quem entra em contato somos nós.</p>
 </section>
 
 <section class="tela texto" data-id="fim-outra" data-p="100">
   <h2>Uma coisa importante.</h2>
-  <p>A análise só começa com o sim de quem vai ser atendido. Não dá para agendar uma sessão por outra pessoa adulta, e isso não é burocracia: <b>é o que protege o processo dela</b>.</p>
-  <p>O que a gente pode fazer agora é te ajudar. Te orientar sobre como ter essa conversa, o que costuma abrir portas e o que costuma fechar, e estar pronto para receber essa pessoa no momento em que ela disser sim.</p>
-  <p style="margin-bottom:22px">Toca no botão abaixo. A conversa é de orientação, e ela vale muito.</p>
+  <p>A análise só começa com o sim de quem vai ser atendido. <b>É isso que protege o processo dela.</b></p>
+  <p>O que a gente pode fazer agora é te orientar: como ter essa conversa, o que abre portas e o que fecha, e estar pronto para o momento em que ela disser sim.</p>
+  <p style="margin-bottom:22px">Toca no botão. A conversa é de orientação, e ela vale muito.</p>
   <button class="btn btn-zap" onclick="abrirZap('outra')">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.24-8.25m-3.4 4.43c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28-.25-.13-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01"/></svg>
     Chamar no WhatsApp
