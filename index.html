@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Academia do Consciente — Atendimento online em psicanálise</title>
-<meta name="description" content="Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera. Agendamento pelo WhatsApp.">
+<meta name="description" content="Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera. Agendamento por formulário rápido.">
 <meta property="og:title" content="Academia do Consciente">
 <meta property="og:description" content="Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera.">
 <meta property="og:type" content="website">
@@ -229,7 +229,7 @@
   .ig-btn:hover { border-color: var(--lilas); color: var(--lilas-escuro); transform: translateY(-1px); }
   .ig-btn svg { width: 18px; height: 18px; display: block; }
 
-  .wa {
+  .cta {
     display: inline-flex;
     align-items: center;
     gap: 9px;
@@ -248,16 +248,16 @@
     white-space: nowrap;
   }
 
-  .wa:hover {
+  .cta:hover {
     background: var(--lilas-escuro);
     border-color: var(--lilas-escuro);
     transform: translateY(-1px);
     box-shadow: 0 10px 24px rgba(122, 94, 148, 0.22);
   }
 
-  .wa svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  .wa.ghost {
+  .cta.ghost {
     background: rgba(255, 255, 255, 0.16);
     border-color: rgba(255, 255, 255, 0.5);
     color: var(--branco);
@@ -266,12 +266,12 @@
     padding: 16px 34px;
     font-size: 12px;
   }
-  .wa.ghost:hover {
+  .cta.ghost:hover {
     background: rgba(255, 255, 255, 0.28);
     border-color: rgba(255, 255, 255, 0.75);
     box-shadow: 0 14px 34px rgba(58, 58, 58, 0.14);
   }
-  .wa.ghost svg { width: 19px; height: 19px; }
+  .cta.ghost svg { width: 19px; height: 19px; }
 
   /* ---------- menu suspenso ---------- */
 
@@ -700,9 +700,8 @@
     :root { --header-h: 64px; }
     .wrap { padding: 0 22px; }
     .brand-name { display: none; }
-    .wa { padding: 9px 16px; font-size: 10px; letter-spacing: 1.5px; }
-    .wa span.wa-label { display: none; }
-    .wa.ghost span.wa-label { display: inline; }
+    .cta { padding: 9px 15px; font-size: 10px; letter-spacing: 1.5px; gap: 7px; }
+    .cta.ghost { padding: 16px 30px; }
     .steps { grid-template-columns: 1fr; }
     .cols { grid-template-columns: 1fr; gap: 36px; }
     .footer-grid { grid-template-columns: 1fr; gap: 34px; }
@@ -757,9 +756,9 @@
         </svg>
       </a>
 
-      <a class="wa" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-        <span class="wa-label">whatsapp</span>
+      <a class="cta" href="https://www.academiadoconsciente.com.br/agendamento.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.8" width="18" height="16.2" rx="2.6"/><line x1="3" y1="9.8" x2="21" y2="9.8"/><line x1="8" y1="2.6" x2="8" y2="6.4"/><line x1="16" y1="2.6" x2="16" y2="6.4"/><path d="M9.2 15.1l2 2 3.6-3.8"/></svg>
+        <span class="cta-label">agendar</span>
       </a>
     </div>
   </div>
@@ -803,11 +802,11 @@
   <p class="lead reveal d4">Atendimento online em psicanálise, com analistas em supervisão contínua. Hora marcada, sem fila de espera.</p>
 
   <div class="reveal d5">
-    <a class="wa ghost" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-      <span class="wa-label">falar no whatsapp</span>
+    <a class="cta ghost" href="https://www.academiadoconsciente.com.br/agendamento.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.8" width="18" height="16.2" rx="2.6"/><line x1="3" y1="9.8" x2="21" y2="9.8"/><line x1="8" y1="2.6" x2="8" y2="6.4"/><line x1="16" y1="2.6" x2="16" y2="6.4"/><path d="M9.2 15.1l2 2 3.6-3.8"/></svg>
+      <span class="cta-label">quero agendar</span>
     </a>
-    <p class="hero-note">resposta no mesmo dia, em horário comercial</p>
+    <p class="hero-note">leva 2 minutos. respondemos em até 1 dia útil</p>
   </div>
 
   <span class="scroll-hint reveal d6" aria-hidden="true">
@@ -839,16 +838,16 @@
 <section id="como-funciona">
   <div class="wrap">
     <span class="eyebrow">como funciona</span>
-    <h2 class="title">quatro passos, sem formulário e sem cadastro<span class="dot">.</span></h2>
+    <h2 class="title">quatro passos, do primeiro contato à primeira sessão<span class="dot">.</span></h2>
 
     <div class="steps">
       <div class="step">
         <span class="step-n">01</span>
-        <p>Você chama no WhatsApp.</p>
+        <p>Você preenche um formulário rápido, com o essencial.</p>
       </div>
       <div class="step">
         <span class="step-n">02</span>
-        <p>Conversamos sobre o que você procura, seus horários e o formato do atendimento.</p>
+        <p>Entramos em contato para conversar sobre o que você procura, seus horários e o formato do atendimento.</p>
       </div>
       <div class="step">
         <span class="step-n">03</span>
@@ -860,7 +859,7 @@
       </div>
     </div>
 
-    <p class="small steps-note">Da primeira mensagem ao primeiro atendimento, o caminho costuma levar poucos dias.</p>
+    <p class="small steps-note">Do envio do formulário ao primeiro atendimento, o caminho costuma levar poucos dias.</p>
   </div>
 </section>
 
@@ -966,7 +965,12 @@
     <div class="faq">
       <details>
         <summary>quanto custa uma sessão?</summary>
-        <div class="answer"><p>O valor é definido por cada analista. Informamos antes de qualquer agendamento, no primeiro contato pelo WhatsApp.</p></div>
+        <div class="answer"><p>O valor é definido por cada analista. Informamos no nosso primeiro retorno, antes de qualquer agendamento.</p></div>
+      </details>
+
+      <details>
+        <summary>por que preciso preencher um formulário?</summary>
+        <div class="answer"><p>Porque é o que nos permite encontrar o analista certo para você em vez de encaixar você em qualquer horário livre. São poucas perguntas e leva cerca de dois minutos. Não é cadastro, não criamos conta e não pedimos histórico clínico.</p></div>
       </details>
 
       <details>
@@ -1015,10 +1019,10 @@
 <!-- CHAMADA FINAL -->
 <div class="closing">
   <h2>a consciência ilumina parte. o resto continua sendo trabalhado<span class="dot">.</span></h2>
-  <a class="wa ghost" href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-    <span class="wa-label">falar no whatsapp</span>
-  </a>
+  <a class="cta ghost" href="https://www.academiadoconsciente.com.br/agendamento.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.8" width="18" height="16.2" rx="2.6"/><line x1="3" y1="9.8" x2="21" y2="9.8"/><line x1="8" y1="2.6" x2="8" y2="6.4"/><line x1="16" y1="2.6" x2="16" y2="6.4"/><path d="M9.2 15.1l2 2 3.6-3.8"/></svg>
+      <span class="cta-label">quero agendar</span>
+    </a>
 </div>
 
 <!-- RODAPÉ -->
@@ -1044,7 +1048,6 @@
       <div class="footer-contact">
         <p>
           São Caetano do Sul, SP<br>
-          WhatsApp: <a href="https://wa.me/5511932872067?text=Quero%20agendar%20uma%20sess%C3%A3o%20com%20um%20psicanalista%20da%20Academia%20do%20Consciente." target="_blank" rel="noopener noreferrer">(11) 93287-2067</a><br>
           <a href="mailto:agendamento@academiadoconsciente.com.br">agendamento@academiadoconsciente.com.br</a><br>
           CNPJ 68.111.312/0001-06
         </p>
